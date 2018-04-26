@@ -1,0 +1,1 @@
+Clustering is the process of making a group of abstract objects into classes of similar objects.

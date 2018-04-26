@@ -1,0 +1,3 @@
+Clustering can be considered the most important unsupervised learning problem; so, as every other problem of this kind, it deals with finding a structure in a collection of unlabeled data.
+A loose definition of clustering could be “the process of organizing objects into groups whose members are similar in some way”.
+A cluster is therefore a collection of objects which are “similar” between them and are “dissimilar” to the objects belonging to other clusters.
