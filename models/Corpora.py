@@ -2,11 +2,24 @@ import os
 from nltk.tokenize import RegexpTokenizer
 
 
+"""
+Notes encoding added --> Windows Laptops
+"""
+
 class Corpora:
     """
     This class creates and contains all corpora of the different algorithms.
     Right now these are stored in a dict with the following form:
     {name_of_algorithm: list_of_words}
+    """
+
+    """
+    Think about it if a class attribute is useful. Imagine the case if we would initialize another corpus object. 
+    That would men that Corpus.token_corpora would hold both tokenized words from corpus object 1 and corpus object 2. 
+    
+    Issue: in my opinion this is quite dangerous because we would generate behavior that we maybe don't want. 
+    Solution: using a magic method (__add__, __iadd__) to concatenate two corpus. 
+    Notes: BTW the class attributes token_corpora, raw_corpora and document_corpora will always be empty.  
     """
     token_corpora = dict()
     raw_corpora = dict()
@@ -18,15 +31,22 @@ class Corpora:
         """
         Builds the complete corpora dictionary.
         Lists 'paths' and 'names' needs to have same sorting.
-        :param paths: List of all paths, where the required .txt files are stored.
+        :param paths: List of all dict_paths, where the required.txt files are stored.
         :param names: List of all names of the algorithms.
         """
+
+        self.token_corpora = dict()
+        self.raw_corpora = dict()
+        self.document_corpora = dict()
+
         for i, path in enumerate(paths):
+            print(path)
+            print(names[i])
             self.build_tokenized_corpus(names[i], path)
             self.build_raw_corpus(names[i], path)
             self.build_document_corpus(names[i], path)
 
-    def build_tokenized_corpus(self, name: str, directory: str):
+    def build_tokenized_corpus(self, name: str, directory: str) -> None:
         """
         This function builds a list with all words of the resulting corpus. The corpus will be created
         based on all .txt files that are stored in the supplied directory.
@@ -36,31 +56,33 @@ class Corpora:
         """
         list_of_all_words = []
         for file in os.listdir(directory):
+            print(file)
             if os.path.isfile(os.path.join(directory, file)) and file.split(".")[1] == "txt":
-                text = open(os.path.join(directory, file), "r").read()
+                text = open(os.path.join(directory, file), "r", encoding="utf-8").read()
                 tokenizer = RegexpTokenizer(r'\w+')
                 words = tokenizer.tokenize(text)
                 list_of_all_words = list_of_all_words + words
-
-        self.set_corpus(name, list_of_all_words, "tokenized")
+        self.token_corpora.update({name: list_of_all_words}) # Why using the set_XX method and not this?
 
     def build_raw_corpus(self, name: str, directory: str):
         all_text = ""
         for file in os.listdir(directory):
             if os.path.isfile(os.path.join(directory, file)) and file.split(".")[1] == "txt":
-                text = open(os.path.join(directory, file), "r").read()
+                text = open(os.path.join(directory, file), "r", encoding="utf-8").read()
                 all_text = all_text + " " + text
-        self.set_corpus(name, all_text, "raw")
+
+        self.raw_corpora.update({name.lower(): all_text})
 
     def build_document_corpus(self, name: str, directory: str):
         documents = []
         for file in os.listdir(directory):
             if os.path.isfile(os.path.join(directory, file)) and file.split(".")[1] == "txt":
-                text = open(os.path.join(directory, file), "r").read()
+                text = open(os.path.join(directory, file), "r", encoding="utf-8").read()
                 documents.append(text)
         self.document_corpora.update({name.lower(): documents})
 
-    def get_corpus(self, name: str, type: str = "raw") -> list:
+    # We can discuss about the method name. Firstly I tought about the purpose of this function
+    def get_corpus_by_class(self, name: str, type: str = "raw") -> list:
         """
         Returns the corpus of the desired algorithm. Available types: raw, document, token
         :param name: Name of the algorithm to be returned
@@ -73,28 +95,7 @@ class Corpora:
         else:
             return self.token_corpora[name.lower()]
 
-    def set_corpus(self, name: str, corpus: list, type: str = "raw"):
-        """
-        Sets the supplied corpus in class dictionary corpora. Available types: raw, document, token
-        :param name: Name of the algorithm
-        :param corpus: List of all words in the corpus
-        :return: void
-        """
-        if type == "raw":
-            self.raw_corpora.update({name.lower(): corpus})
-        elif type == "document":
-            self.document_corpora.update({name.lower(): corpus})
-        else:
-            self.token_corpora.update({name.lower(): corpus})
-
-    def get_all_corpora(self, type: str = "raw"):
-        if type == "raw":
-            return self.raw_corpora
-        elif type == "document":
-            return self.document_corpora
-        else:
-            return self.token_corpora
-
+    # Look at the playground. Its easier to use corpora.attribute_name
     def get_all_algorithms(self, type: str = "raw"):
         if type == "raw":
             return self.raw_corpora.keys()
