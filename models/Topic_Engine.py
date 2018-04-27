@@ -1,9 +1,9 @@
 import nltk
-from Corpora import Corpora
+from models.Corpora import Corpora
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
-import datetime, re, sys
+import datetime, sys
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
