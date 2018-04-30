@@ -38,8 +38,8 @@ class Corpora:
         self.document_corpora = dict()
 
         for i, path in enumerate(paths):
-            print(path)
-            print(names[i])
+            # print(path)
+            # print(names[i])
             self.build_tokenized_corpus(names[i], path)
             self.build_raw_corpus(names[i], path)
             self.build_document_corpus(names[i], path)
@@ -54,7 +54,7 @@ class Corpora:
         """
         list_of_all_words = []
         for file in os.listdir(directory):
-            print(file)
+            # print(file)
             if os.path.isfile(os.path.join(directory, file)) and file.split(".")[1] == "txt":
                 text = open(os.path.join(directory, file), "r", encoding="utf-8").read()
                 tokenizer = RegexpTokenizer(r'\w+')
@@ -79,11 +79,24 @@ class Corpora:
                 documents.append(text)
         self.document_corpora.update({name.lower(): documents})
 
+    # Useful when adding a new corpus to the class and want to have all corpora types at once
+    def build_all_corpora_for_new_algorithm_type(self, name: str, path: str):
+        """
+        This function creates all available corpora types for a new algorithm type.
+        :param name: Name of the algorithm to be created. If already exists - it will be updated
+        :param path: Path to the documents
+        :return: void
+        """
+        self.build_document_corpus(name, path)
+        self.build_raw_corpus(name, path)
+        self.build_tokenized_corpus(name, path)
+
     # We can discuss about the method name. Firstly I tought about the purpose of this function
     def get_corpus_by_class(self, name: str, type: str = "raw") -> list:
         """
         Returns the corpus of the desired algorithm. Available types: raw, document, token
         :param name: Name of the algorithm to be returned
+        :param type: Algorithm type to be returned
         :return: list
         """
         if type == "raw":
