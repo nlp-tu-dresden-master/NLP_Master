@@ -1,4 +1,5 @@
 from models import Corpora
+from models import Topic_Engine
 
 corpus = Corpora(paths=["01_data/01_Clustering_definitions"], names=["Clustering"])
 

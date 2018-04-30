@@ -15,18 +15,16 @@ class Corpora:
 
     """
     Think about it if a class attribute is useful. Imagine the case if we would initialize another corpus object. 
-    That would men that Corpus.token_corpora would hold both tokenized words from corpus object 1 and corpus object 2. 
+    That would mean that Corpus.token_corpora would hold both tokenized words from corpus object 1 and corpus object 2. 
     
     Issue: in my opinion this is quite dangerous because we would generate behavior that we maybe don't want. 
     Solution: using a magic method (__add__, __iadd__) to concatenate two corpus. 
     Notes: BTW the class attributes token_corpora, raw_corpora and document_corpora will always be empty.  
     """
-    token_corpora = dict()
-    raw_corpora = dict()
-    document_corpora = dict()
+    # token_corpora = dict()
+    # raw_corpora = dict()
+    # document_corpora = dict()
 
-    # TODO Maybe use dictionary as well. Would be clear and needs no identical sorting.
-    # TODO replace building methods to simple calling methods not writing them in class attribute
     def __init__(self, names: list, paths: list):
         """
         Builds the complete corpora dictionary.

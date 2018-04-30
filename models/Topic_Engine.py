@@ -23,15 +23,10 @@ class Topic_Engine:
         tokenizer = RegexpTokenizer(r'\w+')
         words = tokenizer.tokenize(text)
 
-        # NER not useful here -> Do not want to find only entities but simple words
-        # NER definitely useful for getting the terms which to show in the example algorithm
-        # chunks = nltk.ne_chunk(nltk.pos_tag(words), binary=True)
-        # entities = [" ".join(w for w, t in elt) for elt in chunks if isinstance(elt, nltk.Tree)]
-        # print(entities)
-
         # remove stopwords
         stop_words = list(stopwords.words("english"))
         relevant_words = [w.lower() for w in words if w.lower() not in stop_words]
+
         # Lemmatize words
         lemmatizer = WordNetLemmatizer()
         lemmatized_words = [lemmatizer.lemmatize(w) for w in relevant_words]
@@ -65,3 +60,10 @@ class Topic_Engine:
         feature_names = tfidf.get_feature_names()
         print('TDM contains ' + str(len(feature_names)) + ' terms and ' + str(tdm.shape[0]) + ' documents')
         print('first 15 terms: ' + str(feature_names[0:14]))
+
+
+# NER not useful here -> Do not want to find only entities but simple words
+# NER definitely useful for getting the terms which to show in the example algorithm
+# chunks = nltk.ne_chunk(nltk.pos_tag(words), binary=True)
+# entities = [" ".join(w for w, t in elt) for elt in chunks if isinstance(elt, nltk.Tree)]
+# print(entities)
