@@ -5,8 +5,9 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import sent_tokenize
 from nltk.wsd import lesk
-import datetime
-from sklearn.feature_extraction.text import TfidfVectorizer
+import re
+import math
+from nltk import bigrams, trigrams
 
 
 class Topic_Engine:
@@ -63,32 +64,92 @@ class Topic_Engine:
 
     # Kind of useless to use tf_idf function.
     # Finds best word to distinguish the documents in the corpus. -> Want to have words that combine these documents
-    def tf_idf(self):
+    def tf_idf(self, algorithms: list) -> dict:
+        """
+        This method uses the tf-idf algorithm to determine the most relevant words in Corpus
+        :return: list
+        """
+        """
+        Defining all helper functions for tf*idf algorithm
+        """
+        def frequency(word: str, document: list) -> int:
+            return document.count(word)
 
-        def tokenize_and_stem(text):
-            tokenizer = RegexpTokenizer(r'\w+')
-            tokens = tokenizer.tokenize(text)
-            stop_words = list(stopwords.words("english"))
-            relevant_words = [w.lower() for w in tokens if w.lower() not in stop_words]
-            lemmatizer = WordNetLemmatizer()
-            lemmatized_words = [lemmatizer.lemmatize(w) for w in relevant_words]
-            return lemmatized_words
+        def number_of_words(doc: str) -> int:
+            return len(doc)
 
-        documents = self.corpora.get_corpus("Clustering", "document")
+        def term_frequency(word: str, document: list) -> float:
+            return float(frequency(word, document) / number_of_words(document))
 
-        tfidf = TfidfVectorizer(tokenizer=tokenize_and_stem, stop_words='english', decode_error='ignore')
-        print('building term-document matrix... [process started: ' + str(datetime.datetime.now()) + ']')
-        sys.stdout.flush()
+        def number_of_docs_containing_word(word: str, documents: list) -> float:
+            count: int = 0
+            for document in documents:
+                if frequency(word, document) > 0:
+                    count += 1
+            return count
 
-        tdm = tfidf.fit_transform(documents)  # this can take some time (about 60 seconds on my machine)
-        print('done! [process finished: ' + str(datetime.datetime.now()) + ']')
-        feature_names = tfidf.get_feature_names()
-        print('TDM contains ' + str(len(feature_names)) + ' terms and ' + str(tdm.shape[0]) + ' documents')
-        print('first 15 terms: ' + str(feature_names[0:14]))
+        def inverse_document_freq(word: str, documents: list) -> float:
+            # log(Total number of documents / number of docs with the term)
+            return math.log(len(documents) / number_of_docs_containing_word(word, documents))
 
+        stopwords = nltk.corpus.stopwords.words('english')
+        lemmatizer = WordNetLemmatizer()
 
-# NER not useful here -> Do not want to find only entities but simple words
-# NER definitely useful for getting the terms which to show in the example algorithm
-# chunks = nltk.ne_chunk(nltk.pos_tag(words), binary=True)
-# entities = [" ".join(w for w, t in elt) for elt in chunks if isinstance(elt, nltk.Tree)]
-# print(entities)
+        result_dict: dict = {}
+        vocabulary: list = []
+        documents: list = [self.corpora.token_corpora[i.lower()] for i in algorithms]  # Already tokenized with RegExp
+
+        for i, tokens in enumerate(documents):
+            doc_id = "{}".format(algorithms[i].lower())
+            # Double cleaning ugly but necessary because there are lemmatized words, lemmatized to "the"
+            cleaned_tokens: list = [lemmatizer.lemmatize(token.lower()) for token in tokens if token not in stopwords]
+            cleaned_tokens = [t for t in cleaned_tokens if t not in stopwords]
+
+            bigram_tokens = bigrams(cleaned_tokens)  # Returns list of tupels
+            bigram_tokens = [' '.join(token) for token in bigram_tokens]
+
+            trigram_tokens: list = trigrams(cleaned_tokens)  # Returns list of tupels
+            trigram_tokens: list = [' '.join(token) for token in trigram_tokens]
+
+            all_tokens: list = []
+            all_tokens.extend(cleaned_tokens)
+            all_tokens.extend(bigram_tokens)
+            all_tokens.extend(trigram_tokens)
+
+            vocabulary.append(all_tokens)
+
+            result_dict.update({doc_id: {}})
+            for i, token in enumerate(all_tokens):
+                result_dict[doc_id].update({token: {}})
+                term_freq: float = term_frequency(token, all_tokens)
+                result_dict[doc_id][token].update({'term_frequency': term_freq})
+
+        for doc in result_dict:
+            for token in result_dict[doc]:
+                # Calculating IDF
+                result_dict[doc][token].update({"inverse_document_frequency": inverse_document_freq(token, vocabulary)})
+                # Calculating TF-IDF
+                result_dict[doc][token].update(
+                    {"tf-idf": result_dict[doc][token]["term_frequency"] * result_dict[doc][token]["inverse_document_frequency"]})
+
+        # Build new dict with only "token -> tf-idf"
+        # TODO Can be included in upper for loop for less code and little bit faster execution
+        words = {}
+        for doc in result_dict:
+            words.update({doc: {}})
+            for token in result_dict[doc]:
+                if token not in words[doc]:
+                    words[doc].update({token: result_dict[doc][token]['tf-idf']})
+                else:
+                    if result_dict[doc][token]['tf-idf'] > words[doc][token]:
+                        words[doc].update({token: result_dict[doc][token]['tf-idf']})
+
+        for doc in words:
+            words[doc] = sorted(words[doc].items(), key=lambda entry: entry[1], reverse=True)
+            print("\n###### Results for algorithm: " + doc + " ######")
+            for i, token_and_score in enumerate(words[doc]):
+                print(token_and_score)
+                if i == 14:
+                    break
+        return words
+

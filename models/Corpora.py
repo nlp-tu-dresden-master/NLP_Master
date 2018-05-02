@@ -60,7 +60,7 @@ class Corpora:
                 tokenizer = RegexpTokenizer(r'\w+')
                 words = tokenizer.tokenize(text)
                 list_of_all_words = list_of_all_words + words
-        self.token_corpora.update({name: list_of_all_words}) # Why using the set_XX method and not this?
+        self.token_corpora.update({name.lower(): list_of_all_words}) # Why using the set_XX method and not this?
 
     def build_raw_corpus(self, name: str, directory: str):
         all_text = ""
