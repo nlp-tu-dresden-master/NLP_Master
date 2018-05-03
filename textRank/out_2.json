@@ -1,0 +1,246 @@
+{"count": 1, "ids": [1, 35], "pos": "np", "rank": 0.04612174457320087, "text": "cluster object"}
+{"count": 1, "ids": [48, 6], "pos": "np", "rank": 0.03835914270378372, "text": "natural groups"}
+{"count": 5, "ids": [4], "pos": "np", "rank": 0.03356657500589724, "text": "data"}
+{"count": 2, "ids": [1, 42], "pos": "np", "rank": 0.023060872286600434, "text": "clustering techniques"}
+{"count": 4, "ids": [46], "pos": "np", "rank": 0.02281925014413671, "text": "instance"}
+{"count": 1, "ids": [6, 13], "pos": "np", "rank": 0.01917957135189186, "text": "group customers"}
+{"count": 5, "ids": [35], "pos": "np", "rank": 0.018684234858958378, "text": "objects"}
+{"count": 1, "ids": [9, 35], "pos": "np", "rank": 0.018632236155609168, "text": "similar objects"}
+{"count": 1, "ids": [165, 39], "pos": "np", "rank": 0.017124739577605255, "text": "low similarity"}
+{"count": 1, "ids": [151, 4], "pos": "np", "rank": 0.01678328750294862, "text": "unlabeled data"}
+{"count": 1, "ids": [1, 2], "pos": "np", "rank": 0.015373914857733623, "text": "clustering algorithms"}
+{"count": 1, "ids": [31, 32], "pos": "np", "rank": 0.014140355895683738, "text": "data clustering"}
+{"count": 1, "ids": [58, 6], "pos": "np", "rank": 0.01278638090126124, "text": "other groups"}
+{"count": 2, "ids": [176], "pos": "np", "rank": 0.011975368891049299, "text": "analysis"}
+{"count": 3, "ids": [58, 1], "pos": "np", "rank": 0.011530436143300217, "text": "other clusters"}
+{"count": 1, "ids": [87, 46], "pos": "np", "rank": 0.011409625072068354, "text": "individual instances"}
+{"count": 1, "ids": [13, 4], "pos": "np", "rank": 0.011188858335299081, "text": "customer data"}
+{"count": 1, "ids": [50], "pos": "np", "rank": 0.011064712350275879, "text": "mechanisms"}
+{"count": 1, "ids": [78, 6], "pos": "np", "rank": 0.00958978567594593, "text": "several groups"}
+{"count": 1, "ids": [200, 35], "pos": "np", "rank": 0.009342117429479189, "text": "abstract objects"}
+{"count": 1, "ids": [1, 119], "pos": "np", "rank": 0.009224348914640175, "text": "cluster centroid"}
+{"count": 1, "ids": [212, 39], "pos": "np", "rank": 0.008562369788802628, "text": "inter-cluster similarity"}
+{"count": 1, "ids": [144, 145, 65, 146], "pos": "np", "rank": 0.008470288981368517, "text": "important unsupervised learning problem"}
+{"count": 1, "ids": [175, 4, 176], "pos": "np", "rank": 0.00839164375147431, "text": "further data analysis"}
+{"count": 7, "ids": [1], "pos": "np", "rank": 0.007686957428866811, "text": "cluster"}
+{"count": 3, "ids": [6], "pos": "np", "rank": 0.0076718285407567435, "text": "group"}
+{"count": 1, "ids": [60, 46], "pos": "np", "rank": 0.007606416714712237, "text": "remaining instances"}
+{"count": 1, "ids": [113, 114], "pos": "np", "rank": 0.0075680736297684785, "text": "distance function"}
+{"count": 1, "ids": [122, 35], "pos": "np", "rank": 0.007473693943583351, "text": "average object"}
+{"count": 1, "ids": [188, 189], "pos": "np", "rank": 0.007305092521956691, "text": "sas institute"}
+{"count": 5, "ids": [112], "pos": "vbn", "rank": 0.007216472375444238, "text": "based"}
+{"count": 1, "ids": [20, 21, 22], "pos": "np", "rank": 0.007190454501174499, "text": "prior claims experience"}
+{"count": 1, "ids": [94, 32, 95], "pos": "np", "rank": 0.007070177947841869, "text": "particular clustering phenomenon"}
+{"count": 1, "ids": [142, 159], "pos": "np", "rank": 0.006934037930660557, "text": "distinct segments"}
+{"count": 7, "ids": [31], "pos": "nn", "rank": 0.006767302291134992, "text": "data"}
+{"count": 1, "ids": [31, 186], "pos": "np", "rank": 0.006767302291134992, "text": "data mining"}
+{"count": 1, "ids": [4, 1], "pos": "np", "rank": 0.006713315001179449, "text": "data clusters"}
+{"count": 1, "ids": [142, 1], "pos": "np", "rank": 0.00658882065331441, "text": "distinct clusters"}
+{"count": 1, "ids": [229, 230], "pos": "np", "rank": 0.006411043170407471, "text": "computational geometry"}
+{"count": 1, "ids": [62, 6], "pos": "np", "rank": 0.00639319045063062, "text": "different groups"}
+{"count": 1, "ids": [157, 158], "pos": "np", "rank": 0.006269275049230933, "text": "n patterns"}
+{"count": 2, "ids": [4, 35], "pos": "np", "rank": 0.006228078286319459, "text": "data objects"}
+{"count": 2, "ids": [199], "pos": "np", "rank": 0.006173718283076915, "text": "information"}
+{"count": 1, "ids": [62, 70], "pos": "np", "rank": 0.006096370021448725, "text": "different ways"}
+{"count": 1, "ids": [139, 91], "pos": "np", "rank": 0.005854725013034569, "text": "\u2019s nature"}
+{"count": 1, "ids": [1, 180], "pos": "np", "rank": 0.0057652180716501085, "text": "cluster utility"}
+{"count": 1, "ids": [33], "pos": "np", "rank": 0.005760556895457578, "text": "methods"}
+{"count": 1, "ids": [164, 39], "pos": "np", "rank": 0.005708246525868418, "text": "high similarity"}
+{"count": 1, "ids": [1, 176, 6], "pos": "np", "rank": 0.005479877529111959, "text": "cluster analysis groups"}
+{"count": 1, "ids": [28, 29, 30], "pos": "np", "rank": 0.005415467290995267, "text": "certain key variables"}
+{"count": 1, "ids": [4, 107], "pos": "np", "rank": 0.005247582759853201, "text": "data tuples"}
+{"count": 3, "ids": [14], "pos": "vbg", "rank": 0.005137444496085597, "text": "according"}
+{"count": 1, "ids": [160, 161], "pos": "np", "rank": 0.004976221460165857, "text": "suitable notion"}
+{"count": 1, "ids": [226, 65], "pos": "np", "rank": 0.004777457787689642, "text": "machine learning"}
+{"count": 3, "ids": [32], "pos": "np", "rank": 0.004713451965227913, "text": "clustering"}
+{"count": 4, "ids": [75], "pos": "vbg", "rank": 0.004695131054354202, "text": "belonging"}
+{"count": 1, "ids": [211, 1], "pos": "np", "rank": 0.004612174457320087, "text": "high-quality clusters"}
+{"count": 1, "ids": [31, 132], "pos": "np", "rank": 0.0045115348607566615, "text": "data reduction"}
+{"count": 1, "ids": [56, 57], "pos": "np", "rank": 0.00444012654852369, "text": "stronger resemblance"}
+{"count": 1, "ids": [223, 224, 225], "pos": "np", "rank": 0.0043838874225429515, "text": "expert research communities"}
+{"count": 2, "ids": [39], "pos": "np", "rank": 0.004281184894401314, "text": "similarity"}
+{"count": 3, "ids": [65], "pos": "nn", "rank": 0.0042351444906842586, "text": "learning"}
+{"count": 1, "ids": [1, 115], "pos": "np", "rank": 0.004192885870290988, "text": "cluster quality"}
+{"count": 1, "ids": [169, 170], "pos": "np", "rank": 0.004058907622869452, "text": "primary goal"}
+{"count": 1, "ids": [42], "pos": "np", "rank": 0.003994794583254415, "text": "technique"}
+{"count": 1, "ids": [97, 98], "pos": "np", "rank": 0.003977988959383377, "text": "very existence"}
+{"count": 1, "ids": [13, 129], "pos": "np", "rank": 0.003906830435982009, "text": "customer locations"}
+{"count": 4, "ids": [13], "pos": "nn", "rank": 0.003906830435982009, "text": "customer"}
+{"count": 1, "ids": [118, 113], "pos": "np", "rank": 0.0039063881292348765, "text": "maximum distance"}
+{"count": 1, "ids": [163, 1], "pos": "np", "rank": 0.0038434787144334057, "text": "good clusters"}
+{"count": 1, "ids": [196, 197, 2], "pos": "np", "rank": 0.0038203846079973153, "text": "specific join algorithm"}
+{"count": 1, "ids": [219, 220], "pos": "np", "rank": 0.0037997849717174978, "text": "science disciplines"}
+{"count": 1, "ids": [122, 113], "pos": "np", "rank": 0.0037840368148842392, "text": "average distance"}
+{"count": 1, "ids": [58, 146], "pos": "np", "rank": 0.0036670381146599873, "text": "other problem"}
+{"count": 1, "ids": [189], "pos": "nn", "rank": 0.0036525462609783457, "text": "institute"}
+{"count": 1, "ids": [22], "pos": "nn", "rank": 0.0035952272505872496, "text": "experience"}
+{"count": 1, "ids": [120, 121], "pos": "np", "rank": 0.0034953289912304833, "text": "alternative measure"}
+{"count": 1, "ids": [209, 142], "pos": "np", "rank": 0.0034670189653302785, "text": "more distinct"}
+{"count": 1, "ids": [183, 184], "pos": "np", "rank": 0.0034420312800364735, "text": "enterprise miner"}
+{"count": 1, "ids": [213, 39], "pos": "np", "rank": 0.003424947915521051, "text": "intra-cluster similarity"}
+{"count": 3, "ids": [67], "pos": "vbn", "rank": 0.003419444581445395, "text": "considered"}
+{"count": 1, "ids": [136, 31], "pos": "np", "rank": 0.003383651145567496, "text": "actual data"}
+{"count": 1, "ids": [18], "pos": "np", "rank": 0.0033671448766511296, "text": "policy"}
+{"count": 3, "ids": [109], "pos": "vbn", "rank": 0.0033497005756893184, "text": "defined"}
+{"count": 2, "ids": [2], "pos": "nn", "rank": 0.003333983746713154, "text": "algorithm"}
+{"count": 1, "ids": [1, 133], "pos": "np", "rank": 0.003294410326657205, "text": "cluster representations"}
+{"count": 1, "ids": [148], "pos": "vbz", "rank": 0.003284885315180429, "text": "deals"}
+{"count": 1, "ids": [147], "pos": "nn", "rank": 0.003250330113438508, "text": "kind"}
+{"count": 2, "ids": [146], "pos": "nn", "rank": 0.0032115724136107956, "text": "problem"}
+{"count": 1, "ids": [230], "pos": "nn", "rank": 0.0032055215852037355, "text": "geometry"}
+{"count": 1, "ids": [158], "pos": "np", "rank": 0.0031346375246154665, "text": "patterns"}
+{"count": 1, "ids": [155], "pos": "np", "rank": 0.003094663946662334, "text": "members"}
+{"count": 3, "ids": [70], "pos": "nn", "rank": 0.0030481850107243625, "text": "way"}
+{"count": 1, "ids": [192], "pos": "vbg", "rank": 0.0029550073706307036, "text": "aggregating"}
+{"count": 1, "ids": [84, 85], "pos": "np", "rank": 0.0029536306048978255, "text": "top level"}
+{"count": 2, "ids": [91], "pos": "nn", "rank": 0.0029273625065172845, "text": "nature"}
+{"count": 1, "ids": [40], "pos": "np", "rank": 0.0029270095220371634, "text": "implementation"}
+{"count": 2, "ids": [36], "pos": "nns", "rank": 0.0028631795393145136, "text": "characteristics"}
+{"count": 1, "ids": [228], "pos": "nn", "rank": 0.002846075365011354, "text": "optimization"}
+{"count": 1, "ids": [167, 168], "pos": "np", "rank": 0.002836708045673298, "text": "product segmentation"}
+{"count": 1, "ids": [222], "pos": "nn", "rank": 0.0027931505616670582, "text": "myriad"}
+{"count": 2, "ids": [186], "pos": "nn", "rank": 0.0027423162671515095, "text": "mining"}
+{"count": 1, "ids": [227], "pos": "nn", "rank": 0.002735944069370684, "text": "statistic"}
+{"count": 1, "ids": [17], "pos": "nns", "rank": 0.002735096533198965, "text": "types"}
+{"count": 1, "ids": [30], "pos": "nns", "rank": 0.0027077336454976336, "text": "variables"}
+{"count": 1, "ids": [62, 42], "pos": "np", "rank": 0.002663196388836276, "text": "different techniques"}
+{"count": 3, "ids": [154], "pos": "nn", "rank": 0.002649278253261788, "text": "process"}
+{"count": 3, "ids": [150], "pos": "nn", "rank": 0.002646010546840738, "text": "collection"}
+{"count": 1, "ids": [82, 83], "pos": "np", "rank": 0.0026458507145637163, "text": "rough division"}
+{"count": 1, "ids": [94, 191], "pos": "np", "rank": 0.0026318049234298866, "text": "particular set"}
+{"count": 1, "ids": [107], "pos": "nns", "rank": 0.0026237913799266005, "text": "tuples"}
+{"count": 1, "ids": [171, 172, 173], "pos": "np", "rank": 0.002605722573567377, "text": "crucial intermediate step"}
+{"count": 1, "ids": [16], "pos": "nn", "rank": 0.0026043894330904545, "text": "age"}
+{"count": 1, "ids": [194, 108], "pos": "np", "rank": 0.0025959495390768016, "text": "metodology partitions"}
+{"count": 1, "ids": [187], "pos": "nn", "rank": 0.002578931901057102, "text": "software"}
+{"count": 2, "ids": [111], "pos": "nn", "rank": 0.0025750722941174664, "text": "space"}
+{"count": 1, "ids": [113], "pos": "np", "rank": 0.002522691209922826, "text": "distance"}
+{"count": 1, "ids": [21], "pos": "nns", "rank": 0.002494825752260477, "text": "claims"}
+{"count": 2, "ids": [203], "pos": "vbn", "rank": 0.002451712258740279, "text": "related"}
+{"count": 1, "ids": [15], "pos": "nn", "rank": 0.002451013168814629, "text": "income"}
+{"count": 1, "ids": [26, 23], "pos": "np", "rank": 0.002439706317710201, "text": "electrical faults"}
+{"count": 1, "ids": [93], "pos": "vb", "rank": 0.002411635240312637, "text": "underlie"}
+{"count": 1, "ids": [19], "pos": "vbn", "rank": 0.002398451790404548, "text": "purchased"}
+{"count": 1, "ids": [188], "pos": "nnp", "rank": 0.0023941387962201, "text": "sas"}
+{"count": 1, "ids": [226], "pos": "nn", "rank": 0.002388728893844821, "text": "machine"}
+{"count": 1, "ids": [135], "pos": "vb", "rank": 0.002296823633536545, "text": "replace"}
+{"count": 2, "ids": [43], "pos": "vbn", "rank": 0.002277406786873894, "text": "applied"}
+{"count": 1, "ids": [162], "pos": "nn", "rank": 0.002268537999723731, "text": "closeness"}
+{"count": 1, "ids": [24, 25], "pos": "np", "rank": 0.002223421470618885, "text": "diagnosis application"}
+{"count": 1, "ids": [57], "pos": "nn", "rank": 0.002220063274261845, "text": "resemblance"}
+{"count": 1, "ids": [224], "pos": "nn", "rank": 0.0021919437112714758, "text": "research"}
+{"count": 1, "ids": [221], "pos": "vbn", "rank": 0.0021743621166580855, "text": "studied"}
+{"count": 1, "ids": [177], "pos": "np", "rank": 0.002173031298307596, "text": "view"}
+{"count": 1, "ids": [28, 80], "pos": "np", "rank": 0.002155268237762572, "text": "certain probability"}
+{"count": 1, "ids": [159], "pos": "nns", "rank": 0.0021459694491795358, "text": "segments"}
+{"count": 2, "ids": [44], "pos": "nns", "rank": 0.0020324025798290676, "text": "classes"}
+{"count": 1, "ids": [170], "pos": "np", "rank": 0.002029453811434726, "text": "goal"}
+{"count": 1, "ids": [53], "pos": "vbn", "rank": 0.002021124322712919, "text": "drawn"}
+{"count": 1, "ids": [214], "pos": "np", "rank": 0.0020119955516461063, "text": "field"}
+{"count": 1, "ids": [185], "pos": "vbg", "rank": 0.0019834859111161926, "text": "leading"}
+{"count": 1, "ids": [27], "pos": "nns", "rank": 0.001976605709671397, "text": "values"}
+{"count": 1, "ids": [130], "pos": "nn", "rank": 0.0019609704116865527, "text": "city"}
+{"count": 1, "ids": [225], "pos": "nns", "rank": 0.0019360657270532655, "text": "communities"}
+{"count": 1, "ids": [103, 104], "pos": "np", "rank": 0.001927252359557786, "text": "pragmatic reasons"}
+{"count": 1, "ids": [100], "pos": "np", "rank": 0.001927252359557786, "text": "\u2019re"}
+{"count": 1, "ids": [11, 12], "pos": "np", "rank": 0.001927252359557786, "text": "insurance company"}
+{"count": 1, "ids": [218], "pos": "nn", "rank": 0.0019115041552628487, "text": "variety"}
+{"count": 1, "ids": [197], "pos": "nn", "rank": 0.0019101923039986576, "text": "join"}
+{"count": 2, "ids": [202], "pos": "nns", "rank": 0.001904424773506846, "text": "relationships"}
+{"count": 1, "ids": [220], "pos": "nns", "rank": 0.0018998924858587489, "text": "disciplines"}
+{"count": 1, "ids": [7], "pos": "nns", "rank": 0.0018968565170470442, "text": "items"}
+{"count": 1, "ids": [3], "pos": "vbp", "rank": 0.0018918841553773565, "text": "examine"}
+{"count": 1, "ids": [174], "pos": "vbd", "rank": 0.001856492991838646, "text": "needed"}
+{"count": 1, "ids": [210], "pos": "nn", "rank": 0.0018408254747999974, "text": "sense"}
+{"count": 2, "ids": [201], "pos": "vbg", "rank": 0.0018178351676915343, "text": "describing"}
+{"count": 2, "ids": [90], "pos": "vbn", "rank": 0.0017978212005527842, "text": "dictated"}
+{"count": 1, "ids": [179], "pos": "nn", "rank": 0.001748464043518473, "text": "placement"}
+{"count": 1, "ids": [96], "pos": "vbn", "rank": 0.0017272020233869412, "text": "known"}
+{"count": 1, "ids": [92], "pos": "vbn", "rank": 0.0017272020233869412, "text": "thought"}
+{"count": 1, "ids": [184], "pos": "nnp", "rank": 0.0017210156400182368, "text": "miner"}
+{"count": 1, "ids": [102], "pos": "vb", "rank": 0.0017210156400182368, "text": "discover"}
+{"count": 1, "ids": [105], "pos": "np", "rank": 0.0017096534706576682, "text": "tools"}
+{"count": 1, "ids": [129], "pos": "nns", "rank": 0.0016939827806535179, "text": "locations"}
+{"count": 1, "ids": [121], "pos": "nn", "rank": 0.0016863731338594991, "text": "measure"}
+{"count": 1, "ids": [117], "pos": "nn", "rank": 0.0016852065009462017, "text": "diameter"}
+{"count": 1, "ids": [122, 124], "pos": "np", "rank": 0.0016666945446256333, "text": "average point"}
+{"count": 2, "ids": [115], "pos": "nn", "rank": 0.0016637623258448791, "text": "quality"}
+{"count": 1, "ids": [128], "pos": "nn", "rank": 0.0016437924270323793, "text": "respect"}
+{"count": 1, "ids": [52], "pos": "nn", "rank": 0.0016296953021887228, "text": "domain"}
+{"count": 1, "ids": [55], "pos": "vb", "rank": 0.0015984835620919701, "text": "bear"}
+{"count": 1, "ids": [77], "pos": "vb", "rank": 0.0015984835620919701, "text": "fall"}
+{"count": 1, "ids": [212], "pos": "nn", "rank": 0.0015664528032556025, "text": "inter-cluster"}
+{"count": 1, "ids": [73], "pos": "vbn", "rank": 0.001547331973331167, "text": "identified"}
+{"count": 2, "ids": [126], "pos": "vbp", "rank": 0.001537317473485214, "text": "show"}
+{"count": 2, "ids": [141], "pos": "vbg", "rank": 0.0015066095450682279, "text": "organizing"}
+{"count": 1, "ids": [152, 153], "pos": "np", "rank": 0.0014845609478656536, "text": "loose definition"}
+{"count": 1, "ids": [85], "pos": "nn", "rank": 0.0014768153024489127, "text": "level"}
+{"count": 1, "ids": [195], "pos": "vbg", "rank": 0.0014732966861311127, "text": "implementing"}
+{"count": 1, "ids": [110], "pos": "nns", "rank": 0.0014701047647778167, "text": "terms"}
+{"count": 1, "ids": [178], "pos": "vbn", "rank": 0.0014444315517431023, "text": "underscored"}
+{"count": 1, "ids": [168], "pos": "nn", "rank": 0.001418354022836649, "text": "segmentation"}
+{"count": 1, "ids": [95], "pos": "nn", "rank": 0.001414106562760051, "text": "phenomenon"}
+{"count": 1, "ids": [215], "pos": "vbd", "rank": 0.001375912522526765, "text": "grew"}
+{"count": 1, "ids": [45], "pos": "vbn", "rank": 0.0013754655821970202, "text": "predicted"}
+{"count": 1, "ids": [116], "pos": "vbn", "rank": 0.0013697030185166527, "text": "represented"}
+{"count": 1, "ids": [98], "pos": "nn", "rank": 0.0013662770519513878, "text": "existence"}
+{"count": 1, "ids": [47], "pos": "vbn", "rank": 0.0013662162893286582, "text": "decided"}
+{"count": 1, "ids": [219], "pos": "nn", "rank": 0.001333293587186252, "text": "science"}
+{"count": 1, "ids": [114], "pos": "nn", "rank": 0.0013250237349942927, "text": "function"}
+{"count": 1, "ids": [54], "pos": "vbz", "rank": 0.0013045612627659926, "text": "causes"}
+{"count": 1, "ids": [51], "pos": "nn", "rank": 0.0013045612627659926, "text": "work"}
+{"count": 1, "ids": [173], "pos": "nn", "rank": 0.0013028612867836886, "text": "step"}
+{"count": 1, "ids": [194], "pos": "nn", "rank": 0.0012979747695384008, "text": "metodology"}
+{"count": 1, "ids": [149], "pos": "nn", "rank": 0.0012931000724235864, "text": "structure"}
+{"count": 1, "ids": [190], "pos": "nn", "rank": 0.001277467495949783, "text": "grouping"}
+{"count": 1, "ids": [72], "pos": "vbn", "rank": 0.001277467495949783, "text": "expressed"}
+{"count": 1, "ids": [132], "pos": "nn", "rank": 0.0012400134297867417, "text": "reduction"}
+{"count": 1, "ids": [213], "pos": "nn", "rank": 0.0012324232527310501, "text": "intra-cluster"}
+{"count": 1, "ids": [161], "pos": "nn", "rank": 0.0012261055108783994, "text": "notion"}
+{"count": 1, "ids": [198], "pos": "vbn", "rank": 0.0012261055108783994, "text": "desired"}
+{"count": 2, "ids": [23], "pos": "nns", "rank": 0.0012198531588551004, "text": "faults"}
+{"count": 1, "ids": [123], "pos": "vbg", "rank": 0.001215386443014529, "text": "denoting"}
+{"count": 1, "ids": [217], "pos": "vb", "rank": 0.0011649212345537757, "text": "separate"}
+{"count": 1, "ids": [86], "pos": "vbd", "rank": 0.001124691212710218, "text": "refined"}
+{"count": 1, "ids": [25], "pos": "np", "rank": 0.0011117107353094426, "text": "applications"}
+{"count": 2, "ids": [34], "pos": "vbg", "rank": 0.0010839687844472789, "text": "making"}
+{"count": 1, "ids": [83], "pos": "nn", "rank": 0.0010830835570358667, "text": "division"}
+{"count": 1, "ids": [191], "pos": "nn", "rank": 0.0010802145955179775, "text": "set"}
+{"count": 1, "ids": [80], "pos": "nn", "rank": 0.001077634118881286, "text": "probability"}
+{"count": 2, "ids": [108], "pos": "nns", "rank": 0.0010726230010746711, "text": "partitions"}
+{"count": 1, "ids": [216], "pos": "np", "rank": 0.0010418695361735211, "text": "purpose"}
+{"count": 1, "ids": [88], "pos": "np", "rank": 0.0010418695361735211, "text": "choice"}
+{"count": 1, "ids": [206], "pos": "nn", "rank": 0.0010408640003976327, "text": "homogeneity"}
+{"count": 1, "ids": [138], "pos": "vbz", "rank": 0.0010059977758230532, "text": "depends"}
+{"count": 1, "ids": [63], "pos": "nn", "rank": 0.0010059977758230532, "text": "classification"}
+{"count": 1, "ids": [207], "pos": "nn", "rank": 0.0009988750352678368, "text": "difference"}
+{"count": 1, "ids": [167], "pos": "nn", "rank": 0.0009953422272299926, "text": "product"}
+{"count": 1, "ids": [157], "pos": "nn", "rank": 0.000970677260355935, "text": "n"}
+{"count": 1, "ids": [69], "pos": "nnp", "rank": 0.000963626179778893, "text": "section"}
+{"count": 1, "ids": [182], "pos": "nn", "rank": 0.000963626179778893, "text": "stage"}
+{"count": 1, "ids": [104], "pos": "nns", "rank": 0.000963626179778893, "text": "reasons"}
+{"count": 1, "ids": [11], "pos": "nn", "rank": 0.000963626179778893, "text": "insurance"}
+{"count": 1, "ids": [38], "pos": "vbg", "rank": 0.000963626179778893, "text": "checking"}
+{"count": 1, "ids": [127], "pos": "nn", "rank": 0.0009564466904874045, "text": "plot"}
+{"count": 1, "ids": [64], "pos": "nn", "rank": 0.0009484236453067629, "text": "association"}
+{"count": 1, "ids": [61], "pos": "vbn", "rank": 0.0009470622578957042, "text": "required"}
+{"count": 1, "ids": [180], "pos": "nn", "rank": 0.0009470622578957042, "text": "utility"}
+{"count": 1, "ids": [133], "pos": "nns", "rank": 0.0009470622578957042, "text": "representations"}
+{"count": 1, "ids": [119], "pos": "nn", "rank": 0.0009470622578957042, "text": "centroid"}
+{"count": 1, "ids": [49], "pos": "vbp", "rank": 0.0009470622578957042, "text": "reflect"}
+{"count": 1, "ids": [143], "pos": "vbn", "rank": 0.0009470622578957042, "text": "smeared"}
+{"count": 1, "ids": [76], "pos": "vbg", "rank": 0.0009435755287077094, "text": "overlapping"}
+{"count": 1, "ids": [183], "pos": "nnp", "rank": 0.0009303666783748728, "text": "enterprise"}
+{"count": 1, "ids": [12], "pos": "nn", "rank": 0.0009303666783748728, "text": "company"}
+{"count": 1, "ids": [124], "pos": "nn", "rank": 0.0008333472723128166, "text": "point"}
+{"count": 1, "ids": [24], "pos": "nn", "rank": 0.0007801596229008891, "text": "diagnosis"}
+{"count": 1, "ids": [153], "pos": "nn", "rank": 0.0007422804739328268, "text": "definition"}
+{"count": 1, "ids": [89], "pos": "nns", "rank": 0.000668498571984138, "text": "possibilities"}
+{"count": 1, "ids": [137], "pos": "nn", "rank": 0.0005209347680867606, "text": "effectiveness"}
+{"count": 1, "ids": [125], "pos": "nn", "rank": 0.0005209347680867606, "text": "figure"}
+{"count": 1, "ids": [71], "pos": "nn", "rank": 0.0005209347680867606, "text": "result"}
+{"count": 1, "ids": [37], "pos": "nn", "rank": 0.0005209347680867606, "text": "criterion"}
+{"count": 1, "ids": [193], "pos": "vbg", "rank": 0.0005209347680867606, "text": "regarding"}
+{"count": 1, "ids": [99], "pos": "nn", "rank": 0.0005209347680867606, "text": "something"}
+{"count": 1, "ids": [181], "pos": "nn", "rank": 0.0005209347680867606, "text": "exploration"}
+{"count": 1, "ids": [10], "pos": "nn", "rank": 0.0005209347680867606, "text": "example"}
