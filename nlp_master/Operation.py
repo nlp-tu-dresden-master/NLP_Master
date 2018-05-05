@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from models import Corpora, TopicSet
+from nlp_master import Corpora, TopicSet
 
 class Operation(ABC):
 

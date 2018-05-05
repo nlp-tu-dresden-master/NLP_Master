@@ -1,5 +1,5 @@
 import nltk
-from models.Corpora import Corpora
+from nlp_master.Corpora import Corpora
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
