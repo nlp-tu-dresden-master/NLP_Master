@@ -1,6 +1,6 @@
 import os
 from nltk.tokenize import RegexpTokenizer
-from models.SynsetVocab import SynsetVocab
+from nlp_master.SynsetVocab import SynsetVocab
 
 """
 Notes encoding added --> Windows Laptops

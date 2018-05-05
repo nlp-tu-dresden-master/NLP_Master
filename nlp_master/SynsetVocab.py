@@ -10,7 +10,7 @@ This class is used to hold a dictionary with the references from numbers to word
 """
 
 
-class SynsetVocab():
+class SynsetVocab:
 
     def __init__(self, raw_corp: dict):
         self.synset_vocab = dict()
@@ -23,7 +23,7 @@ class SynsetVocab():
         The synset_vocab dictionary contains all the different synsets/wsd that are contained in the raw corpora
         The word_vocab contains all the synsets as keys and the real words as values.
         This way we can go back from numbers to words if required.
-        :param raw_corp: 
+        :param raw_corp:
         :return:
         """
         synset_vocab: dict = dict()

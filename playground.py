@@ -1,5 +1,5 @@
-from models import Corpora
-from models import TopicEngine
+from nlp_master import Corpora
+from nlp_master import TopicEngine
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet as wn
 corp = Corpora(["Clustering", "classification"], ["01_data/01_Clustering_definitions", "01_data/02_Classification_definitions"])

@@ -14,7 +14,7 @@ import re
 import spacy
 import statistics
 import string
-import en_core_web_sm # pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-1.2.0/en_core_web_sm-1.2.0.tar.gz
+import en_core_web_sm  # pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-1.2.0/en_core_web_sm-1.2.0.tar.gz
 
 print("Im the changed version")
 

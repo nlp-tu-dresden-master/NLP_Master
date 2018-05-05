@@ -2,13 +2,14 @@ import math
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk import bigrams, trigrams
-from models.Corpora import Corpora
+from nlp_master import Corpora
+from nlp_master import Operation
 
 
-class TFIDF:  # Should be TFIDF(Operations)
+class TFIDF(Operation):
 
-    def __init__(self):
-        pass
+    def __init__(self, corp: Corpora):
+        Operation.__init__(self, corp)
 
     def frequency(self, word: str, document: list) -> int:
         return document.count(word)
