@@ -1,0 +1,31 @@
+from setuptools import setup
+# Maybe it's possible to enter path to en_core_web stuff to install all shit.
+setup(name='nlp_master',
+      version='0.1',
+      description='A implementation of different classes etc. for our master thesis.',
+      long_description= "A implementation of different classes etc. for our master thesis.",
+      classifiers=[
+        'Development Status :: Alpha',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Information Technology',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3',
+        'Topic :: Scientific/Engineering :: Artificial Intelligence',
+        'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+        'Topic :: Scientific/Engineering :: Information Analysis',
+        'Topic :: Text Processing :: General',
+        'Topic :: Text Processing :: Indexing',
+        'Topic :: Text Processing :: Linguistic',
+      ],
+      keywords='test',
+      url='',
+      author='Hoeschele & Horn',
+      author_email='',
+      license='Apache License 2.0',
+      packages=['nlp_master'],
+      install_requires=[
+      ],
+      zip_safe=False)
