@@ -13,6 +13,8 @@ This class is used to hold a dictionary with the references from numbers to word
 class SynsetVocab:
 
     def __init__(self, raw_corp: dict):
+        if not isinstance(raw_corp, dict):
+            raise ValueError("Invalid argument! Instance of dict excepted as parameter!")
         self.synset_vocab = dict()
         self.word_vocab = dict()
         self.build_synset_and_word_vocab(raw_corp)
@@ -23,63 +25,93 @@ class SynsetVocab:
         The synset_vocab dictionary contains all the different synsets/wsd that are contained in the raw corpora
         The word_vocab contains all the synsets as keys and the real words as values.
         This way we can go back from numbers to words if required.
-        :param raw_corp:
-        :return:
+        :param raw_corp: Raw Corpora of all algorithm types as dict
+        :return: None
         """
         synset_vocab: dict = dict()
         word_vocab: dict = dict()
         all_wsds: list = list()
-        tokenizer = RegexpTokenizer(r'\w+')
-        lemmatizer = WordNetLemmatizer()
-        stop_words: list = list(stopwords.words("english"))
         all_cleaned_tokens: list = list()
 
         for alg in raw_corp:
-            sentences: list = sent_tokenize(raw_corp[alg])
-            for sent in sentences:
-                tokens: list = tokenizer.tokenize(sent)
-                tagged_tokens = nltk.pos_tag(tokens)
-                # Double cleaning necessary
-                # Pos Tagging increases precision of lemmatizer significantly!
-                cleaned_tokens = [(lemmatizer.lemmatize(w.lower(), self.get_wordnet_pos(i)), i)
-                                        for w, i in tagged_tokens if w not in stop_words]
-                cleaned_tokens = [(word, pos) for word, pos in cleaned_tokens if word not in stop_words]
-                all_cleaned_tokens.extend(cleaned_tokens)
+            cleaned_sentences = self.preprocess_text(raw_corp[alg])
+            # sentences: list = sent_tokenize(raw_corp[alg])
+            for clean_sent in cleaned_sentences:
+                all_cleaned_tokens.extend(clean_sent)
+                raw_sentence = " ".join([w for w, t in clean_sent])
 
-                for (word, tag) in cleaned_tokens:
-                    wsd = lesk(sent, word, self.get_wordnet_pos(tag))
+                for (word, tag) in clean_sent:
+                    wsd = lesk(raw_sentence, word, self.get_wordnet_pos(tag))
                     # Took list to have full index range afterwards
                     all_wsds.append(wsd)
 
-        # print("wsd: {}  words: {}".format(len(all_wsds), len(all_cleaned_tokens)))
-        index_of_syn_dict = 0
+        none_counter = 0
         for i, synset in enumerate(all_wsds):
             if synset is not None:
-                if synset not in synset_vocab.values():
-                    # TODO What to do with None types? -> Different words but no synset...
-                    # FUCK IT! SynSets do not have always the real word inside!
-                    synset_vocab.update({index_of_syn_dict: synset})
-                    index_of_syn_dict += 1
+                # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines __eq__
+                # method and tries to call attribute __name from string. -> Not possible
+                if str(synset) not in [str(x) for x in synset_vocab.values()]:
+                    # Push in synset_vocab and word_vocab
+                    synset_vocab.update({i: synset})
                     if synset not in word_vocab.keys():
                         word_vocab.update({synset: [all_cleaned_tokens[i]]})
                     else:
                         current_list_of_words = word_vocab[synset]
                         current_list_of_words.append(all_cleaned_tokens[i])
             else:
-                if "None" not in word_vocab.keys():
-                    word_vocab.update({"None": [all_cleaned_tokens[i]]})
-                else:
-                    current_list_of_words = word_vocab["None"]
-                    current_list_of_words.append(all_cleaned_tokens[i])
-
-        # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines __eq__
-        # method and tries to call attribute __name from string. -> Not possible
-        # Therefore, skipping None values in synsets and adding "None" as last entry in dict.
-        synset_vocab.update({len(synset_vocab): "None"})
+                synset_vocab.update({i: "None_{}".format(none_counter)})
+                # Still value needs to be list for consistency
+                word_vocab.update({"None_{}".format(none_counter): [all_cleaned_tokens[i]]})
+                none_counter += 1
         # print(synset_vocab)
         # print(word_vocab)
         self.synset_vocab = synset_vocab
         self.word_vocab = word_vocab
+
+    def preprocess_text(self, text: str) -> list:
+        """
+        This method preprocesses the given text with tokenizing, lemmatizing and pos tagging.
+        It returns a list with every tokenized sentence as a list with values (word, pos_tag).
+        :param text: Raw input text
+        :return: list (sentences) of list (words) with format list(list((word, pos_tag)))
+        """
+        result: list = list()
+        tokenizer = RegexpTokenizer(r'\w+')
+        lemmatizer = WordNetLemmatizer()
+        stop_words: list = list(stopwords.words("english"))
+
+        sentences: list = sent_tokenize(text)
+        for sent in sentences:
+            tokens: list = tokenizer.tokenize(sent)
+            tagged_tokens = nltk.pos_tag(tokens)
+            # Double cleaning necessary
+            # Pos Tagging increases precision of lemmatizer significantly!
+            cleaned_tokens = [(lemmatizer.lemmatize(w.lower(), self.get_wordnet_pos(i)), i)
+                              for w, i in tagged_tokens if w not in stop_words]
+            cleaned_tokens = [(word, pos) for word, pos in cleaned_tokens if word not in stop_words]
+            result.append(cleaned_tokens)
+        return result
+        pass
+
+    def encode(self, text: str):
+        all_words_as_numbers: list = list()
+        clean_text = self.preprocess_text(text)
+        none_counter = 0
+        for sentence in clean_text:
+            sentence_together = " ".join([word for word, tag in sentence])
+            for word, pos_tag in sentence:
+                wsd = lesk(sentence_together, word, self.get_wordnet_pos(pos_tag))
+                if wsd is None:
+                    wsd = "None_{}".format(none_counter)
+                    none_counter += 1
+                number = [key for key, value in self.synset_vocab.items() if str(value) == str(wsd)][0]
+                # print("original: {}".format(wsd))
+                # print("found: {}".format(number))
+                all_words_as_numbers.append(str(number))
+        return " ".join(all_words_as_numbers)
+
+    def decode(self):
+        pass
 
     @staticmethod
     def get_wordnet_pos(pos_tag: str):

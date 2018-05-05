@@ -27,6 +27,10 @@ class Corpora:
         :param paths: List of all dict_paths, where the required.txt files are stored.
         :param names: List of all names of the algorithms.
         """
+        if not isinstance(names, list):
+            raise ValueError('Invalid argument! Parameter "names" must be of instance list!')
+        if not isinstance(paths, list):
+            raise ValueError('Invalid argument! Parameter "paths" must be of instance list!')
         self.raw_corpora = dict()
         # Required for document corpora
         self.__algorithm_names = names
@@ -34,7 +38,6 @@ class Corpora:
 
         for i, path in enumerate(paths):
             self.build_raw_corpus(names[i], path)
-            self.vocab_object = SynsetVocab(self.raw_corpora)
 
     def build_raw_corpus(self, name: str, directory: str):
         all_text = ""

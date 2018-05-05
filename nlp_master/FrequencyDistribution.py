@@ -3,15 +3,15 @@ from nlp_master import Operation
 from nlp_master import Corpora
 import nltk
 from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
-from multiset import Multiset
 from nlp_master import TopicSet
 
 
 class FrequencyDistribution(Operation):
 
     def __init__(self, corp: Corpora):
+        if not isinstance(corp, Corpora):
+            raise ValueError("Invalid argument! Instance of Corpora excepted as parameter!")
         Operation.__init__(self, corp)
         self.keywords = dict()
 
@@ -21,7 +21,7 @@ class FrequencyDistribution(Operation):
         :param corp: The corpora object
         :return: list of relevant words
         """
-        result:dict = dict()
+        result: dict = dict()
         stop_words = list(stopwords.words("english"))
         all_words: dict = corp.build_tokenized_corpora()
         lemmatizer = WordNetLemmatizer()
@@ -41,7 +41,6 @@ class FrequencyDistribution(Operation):
         for alg in result:
             # add this to the new topicSet
             pass
-
 
     def visualize(self, **kwargs):
         pass

@@ -9,6 +9,8 @@ from nlp_master import Operation
 class TFIDF(Operation):
 
     def __init__(self, corp: Corpora):
+        if not isinstance(corp, Corpora):
+            raise ValueError("Invalid argument! Instance of Corpora excepted as parameter!")
         Operation.__init__(self, corp)
 
     def frequency(self, word: str, document: list) -> int:
@@ -105,5 +107,5 @@ class TFIDF(Operation):
                     break
         return words
 
-    def visualize(self) -> None:
+    def visualize(self, **kwargs) -> None:
         pass
