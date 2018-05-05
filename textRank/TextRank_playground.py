@@ -1,9 +1,8 @@
 from pytextrank import *
 import networkx as nx
 import matplotlib.pyplot as plt
-from models.Corpora import Corpora
+from nlp_master.Corpora import Corpora
 import json
-import pandas as pd
 import seaborn as sns
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
+# Maybe it's possible to enter path to en_core_web stuff to install all shit.
 setup(name='pytextrank',
       version='1.1.0',
       description='Python implimentation of TextRank for text document NLP parsing and summarization',
@@ -31,10 +32,5 @@ setup(name='pytextrank',
       license='Apache License 2.0',
       packages=['pytextrank'],
       install_requires=[
-          'datasketch',
-          'graphviz',
-          'networkx',
-          'spacy',
-          'statistics',
       ],
       zip_safe=False)
