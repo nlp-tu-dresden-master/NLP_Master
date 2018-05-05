@@ -1,2 +1,3 @@
 from models.Corpora import Corpora
-from models.Topic_Engine import Topic_Engine
+from models.TopicEngine import TopicEngine
+from models.SynsetVocab import SynsetVocab
