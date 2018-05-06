@@ -6,6 +6,7 @@ from nlp_master.SynsetVocab import SynsetVocab
 Notes encoding added --> Windows Laptops
 """
 
+
 class Corpora:
     """
     This class creates and contains all corpora of the different algorithms.
@@ -20,7 +21,7 @@ class Corpora:
     Solution: using a magic method (__add__, __iadd__) to concatenate two corpus. 
     Notes: BTW the class attributes token_corpora, raw_corpora and document_corpora will always be empty.  
     """
-    def __init__(self, names: list, paths: list):
+    def __init__(self, names: list = list(), paths: list = list(), encoded: dict = None):
         """
         Builds the complete corpora dictionary.
         Lists 'paths' and 'names' needs to have same sorting.
@@ -31,13 +32,21 @@ class Corpora:
             raise ValueError('Invalid argument! Parameter "names" must be of instance list!')
         if not isinstance(paths, list):
             raise ValueError('Invalid argument! Parameter "paths" must be of instance list!')
-        self.raw_corpora = dict()
+
         # Required for document corpora
         self.__algorithm_names = names
         self.__paths = paths
-
-        for i, path in enumerate(paths):
-            self.build_raw_corpus(names[i], path)
+        # Case difference if already encoded or raw
+        if encoded is None:
+            self.raw_corpora = dict()
+            for i, path in enumerate(paths):
+                self.build_raw_corpus(names[i], path)
+        else:
+            # Simply save the supplied corpora
+            if isinstance(encoded, dict):
+                self.raw_corpora = encoded
+            else:
+                raise ValueError("If a already encoded corpora should be created, please supply the complete dict.")
 
     def build_raw_corpus(self, name: str, directory: str):
         all_text = ""
