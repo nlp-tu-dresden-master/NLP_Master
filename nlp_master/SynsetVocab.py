@@ -34,7 +34,7 @@ class SynsetVocab:
         all_cleaned_tokens: list = list()
 
         for alg in raw_corp:
-            cleaned_sentences = self.preprocess_text(raw_corp[alg])
+            cleaned_sentences = self._preprocess_text(raw_corp[alg])
             # sentences: list = sent_tokenize(raw_corp[alg])
             for clean_sent in cleaned_sentences:
                 all_cleaned_tokens.extend(clean_sent)
@@ -68,7 +68,7 @@ class SynsetVocab:
         self.synset_vocab = synset_vocab
         self.word_vocab = word_vocab
 
-    def preprocess_text(self, text: str) -> list:
+    def _preprocess_text(self, text: str) -> list:
         """
         This method preprocesses the given text with tokenizing, lemmatizing and pos tagging.
         It returns a list with every tokenized sentence as a list with values (word, pos_tag).
@@ -92,9 +92,9 @@ class SynsetVocab:
             result.append(cleaned_tokens)
         return result
 
-    def encode(self, text: str) -> str:
+    def encode(self, text: str) -> list:
         all_words_as_numbers: list = list()
-        clean_text = self.preprocess_text(text)
+        clean_text = self._preprocess_text(text)
         none_counter = 0
         for sentence in clean_text:
             sentence_together = " ".join([word for word, tag in sentence])
@@ -107,7 +107,7 @@ class SynsetVocab:
                 # print("original: {}".format(wsd))
                 # print("found: {}".format(number))
                 all_words_as_numbers.append(str(number))
-        return " ".join(all_words_as_numbers)
+        return all_words_as_numbers
 
     def decode(self, text: str) -> str:
         numbers = text.split(" ")

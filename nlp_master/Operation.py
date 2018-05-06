@@ -10,7 +10,7 @@ class Operation(ABC):
         self.corpora = corpora
 
     @abstractmethod
-    def extract_keywords(self, corp: Corpora) -> TopicSet:
+    def extract_keywords(self) -> TopicSet:
         pass
 
     @abstractmethod

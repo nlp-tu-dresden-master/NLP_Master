@@ -14,8 +14,9 @@ class FrequencyDistribution(Operation):
             raise ValueError("Invalid argument! Instance of Corpora excepted as parameter!")
         Operation.__init__(self, corp)
         self.keywords = dict()
+        self.corpora = corp
 
-    def extract_keywords(self, corp: Corpora) -> None:
+    def extract_keywords(self) -> None:
         """
         This function searches for most often occurring words in given corpus.
         :param corp: The corpora object
@@ -23,7 +24,7 @@ class FrequencyDistribution(Operation):
         """
         result: dict = dict()
         stop_words = list(stopwords.words("english"))
-        all_words: dict = corp.build_tokenized_corpora()
+        all_words: dict = self.corpora.build_encoded_corpora()  # How  to get the Fucking VOCAB here?!?!
         lemmatizer = WordNetLemmatizer()
 
         for alg_class in all_words:
