@@ -30,7 +30,6 @@ dependencies:
   - datasketch==1.2.5
   - decorator==4.3.0
   - dill==0.2.7.1
-  - en-core-web-sm==1.2.0
   - entrypoints==0.2.3
   - ez-setup==0.9
   - ftfy==4.4.3
@@ -58,7 +57,6 @@ dependencies:
   - nbconvert==5.3.1
   - nbformat==4.4.0
   - networkx==2.1
-  - nlp-master==0.1
   - nltk==3.2.5
   - notebook==5.4.1
   - numpy==1.14.3

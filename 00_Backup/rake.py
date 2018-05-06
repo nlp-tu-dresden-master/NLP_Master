@@ -6,7 +6,7 @@
 
 import re
 import operator
-from models import Corpora
+from nlp_master import Corpora
 import os
 import nltk
 from nltk.tokenize import word_tokenize
