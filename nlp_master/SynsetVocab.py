@@ -63,8 +63,8 @@ class SynsetVocab:
                 # Still value needs to be list for consistency
                 word_vocab.update({"None_{}".format(none_counter): [all_cleaned_tokens[i]]})
                 none_counter += 1
-        # print(synset_vocab)
-        # print(word_vocab)
+        print(synset_vocab)
+        print(word_vocab)
         self.synset_vocab = synset_vocab
         self.word_vocab = word_vocab
 
@@ -91,9 +91,8 @@ class SynsetVocab:
             cleaned_tokens = [(word, pos) for word, pos in cleaned_tokens if word not in stop_words]
             result.append(cleaned_tokens)
         return result
-        pass
 
-    def encode(self, text: str):
+    def encode(self, text: str) -> str:
         all_words_as_numbers: list = list()
         clean_text = self.preprocess_text(text)
         none_counter = 0
@@ -110,8 +109,11 @@ class SynsetVocab:
                 all_words_as_numbers.append(str(number))
         return " ".join(all_words_as_numbers)
 
-    def decode(self):
-        pass
+    def decode(self, text: str) -> str:
+        numbers = text.split(" ")
+        synsets = [self.synset_vocab[int(number)] for number in numbers]
+        words = [self.word_vocab[synset] for synset in synsets]
+        return " ".join([word for [(word, pos)] in words])
 
     @staticmethod
     def get_wordnet_pos(pos_tag: str):
