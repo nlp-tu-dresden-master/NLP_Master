@@ -24,7 +24,6 @@ class TopicEngine:
         tfidf = TFIDF(corp=encoded_corpora)
         tfidf_keywords = tfidf.extract_keywords()
 
-
     def convert_corpora(self):
         encoded_dict: dict = dict()
         for algorithm_class in self.corpora.raw_corpora:
