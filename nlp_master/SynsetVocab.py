@@ -63,8 +63,9 @@ class SynsetVocab:
                 # Still value needs to be list for consistency
                 word_vocab.update({"None_{}".format(none_counter): [all_cleaned_tokens[i]]})
                 none_counter += 1
-        print(synset_vocab)
-        print(word_vocab)
+        # print(synset_vocab)
+        # print(word_vocab)
+        print("Vocabulary created!")
         self.synset_vocab = synset_vocab
         self.word_vocab = word_vocab
 

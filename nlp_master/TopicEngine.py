@@ -1,7 +1,7 @@
-import nltk
-from nlp_master import Corpora
-from nlp_master import SynsetVocab
-from nlp_master import TFIDF
+from nlp_master.Corpora import Corpora
+from nlp_master.SynsetVocab import SynsetVocab
+from nlp_master.TFIDF import TFIDF
+from nlp_master.FrequencyDistribution import FrequencyDistribution
 
 
 class TopicEngine:
@@ -19,8 +19,11 @@ class TopicEngine:
         :return:
         """
         encoded_corpora: Corpora = self.convert_corpora()
+        freq_dist = FrequencyDistribution(corp=encoded_corpora)
+        freq_keywords = freq_dist.extract_keywords()
+        tfidf = TFIDF(corp=encoded_corpora)
+        tfidf_keywords = tfidf.extract_keywords()
 
-        pass
 
     def convert_corpora(self):
         encoded_dict: dict = dict()

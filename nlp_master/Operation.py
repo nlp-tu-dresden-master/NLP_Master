@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from nlp_master import Corpora, TopicSet
+from nlp_master.Corpora import Corpora
+from nlp_master.TopicSet import TopicSet
+from nlp_master.SynsetVocab import SynsetVocab
 
 
 class Operation(ABC):

@@ -76,7 +76,7 @@ class Corpora:
         :return: dict
         """
         document_corpora = dict()
-        for i, directory in enumerate(self.paths):
+        for i, directory in enumerate(self.__paths):
             documents = []
             for file in os.listdir(directory):
                 if os.path.isfile(os.path.join(directory, file)) and file.split(".")[1] == "txt":
@@ -84,12 +84,3 @@ class Corpora:
                     documents.append(text)
             document_corpora.update({self.__algorithm_names[i].lower(): documents})
         return document_corpora
-
-    def build_encoded_corpora(self, vocab: SynsetVocab) -> dict:
-        if not isinstance(vocab, SynsetVocab):
-            raise ValueError('Parameter "vocab" must be instance of Class SynsetVocab!')
-        encoded_corp: dict = dict()
-        for algorithm in self.raw_corpora:
-            encoded: list = vocab.encode(self.raw_corpora[algorithm])
-            encoded_corp.update({algorithm: encoded})
-        return encoded_corp

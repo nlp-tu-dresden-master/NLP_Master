@@ -1,9 +1,8 @@
 import math
-import nltk
-from nltk.stem import WordNetLemmatizer
 from nltk import bigrams, trigrams
-from nlp_master import Corpora
-from nlp_master import Operation
+from nlp_master.Corpora import Corpora
+from nlp_master.Operation import Operation
+from nlp_master.TopicSet import TopicSet
 
 
 class TFIDF(Operation):
@@ -11,7 +10,8 @@ class TFIDF(Operation):
     def __init__(self, corp: Corpora):
         if not isinstance(corp, Corpora):
             raise ValueError("Invalid argument! Instance of Corpora excepted as parameter!")
-        Operation.__init__(self, corp)
+        super().__init__(corpora=corp)
+        self.keywords = dict()
 
     def frequency(self, word: str, document: list) -> int:
         return document.count(word)
@@ -33,45 +33,39 @@ class TFIDF(Operation):
         # log(Total number of documents / number of docs with the term)
         return math.log(len(documents) / self.number_of_docs_containing_word(word, documents))
 
-    def extract_keywords(self, corpora: Corpora):  # Should return TopicSet!
+    def extract_keywords(self) -> dict:  # Should return TopicSet!
         """
         This method uses the tf-idf algorithm to determine the most relevant words in Corpus
         """
         """
         Defining all helper functions for tf*idf algorithm
         """
-        stopwords = nltk.corpus.stopwords.words('english')
-        lemmatizer = WordNetLemmatizer()
 
         result_dict: dict = {}
         vocabulary: list = []
-        tokenized_corpora = corpora.build_tokenized_corpora()  # Already tokenized with RegExp Tokenizer
-        algorithms = tokenized_corpora.keys()
+        tokenized_corpora = self.corpora.raw_corpora
+        algorithms = list(tokenized_corpora)
 
-        documents: list = [tokenized_corpora[i.lower()] for i in algorithms]
+        documents: list = [tokenized_corpora[i] for i in algorithms]
 
         for i, tokens in enumerate(documents):
             doc_id = "{}".format(algorithms[i].lower())
-            # Double cleaning ugly but necessary because there are lemmatized words, lemmatized to "the"
-            cleaned_tokens: list = [lemmatizer.lemmatize(token.lower()) for token in tokens if
-                                    token not in stopwords]
-            cleaned_tokens = [t for t in cleaned_tokens if t not in stopwords]
 
-            bigram_tokens = bigrams(cleaned_tokens)  # Returns list of tupels
+            bigram_tokens = bigrams(tokens)  # Returns list of tupels
             bigram_tokens = [' '.join(token) for token in bigram_tokens]
 
-            trigram_tokens: list = trigrams(cleaned_tokens)  # Returns list of tupels
+            trigram_tokens: list = trigrams(tokens)  # Returns list of tupels
             trigram_tokens: list = [' '.join(token) for token in trigram_tokens]
 
             all_tokens: list = []
-            all_tokens.extend(cleaned_tokens)
+            all_tokens.extend(tokens)
             all_tokens.extend(bigram_tokens)
             all_tokens.extend(trigram_tokens)
 
             vocabulary.append(all_tokens)
-
             result_dict.update({doc_id: {}})
-            for i, token in enumerate(all_tokens):
+
+            for j, token in enumerate(all_tokens):
                 result_dict[doc_id].update({token: {}})
                 term_freq: float = self.term_frequency(token, all_tokens)
                 result_dict[doc_id][token].update({'term_frequency': term_freq})
@@ -105,6 +99,7 @@ class TFIDF(Operation):
                 print(token_and_score)
                 if i == 14:
                     break
+        self.keywords = words
         return words
 
     def visualize(self, **kwargs) -> None:
