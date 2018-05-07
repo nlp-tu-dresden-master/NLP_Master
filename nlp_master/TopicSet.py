@@ -8,7 +8,7 @@ class KeyWord:
         self.algorithm = algorithm
 
     def __str__(self):
-        return str(self.keyword)
+        return str(self.keyword) + "| " + str(self.rank) + "| " + str(self.algorithm)
 
     def __repr__(self):
         return "({}, {})".format(self.keyword, self.rank)
@@ -40,6 +40,20 @@ class TopicSet:
         [topic_set.add_keyword(x.keyword, x.rank, x.algorithm) for x in (self.keyword_set + other.keyword_set)]
 
         return topic_set
+
+    def __len__(self):
+        return len(self.keyword_set)
+
+    def __iter__(self):
+        return iter(self.keyword_set)
+
+    def norm_ranks(self):
+        maximum = max([x.rank for x in self.keyword_set])
+        normed_keyword_set = []
+        for keyword in self.keyword_set:
+            keyword.rank = keyword.rank / maximum * maximum
+            normed_keyword_set.append(keyword)
+        self.keyword_set = normed_keyword_set
 
     def add_keyword(self, keyword, rank: float, algorithm: str = None) -> None:
         if algorithm is not None:
