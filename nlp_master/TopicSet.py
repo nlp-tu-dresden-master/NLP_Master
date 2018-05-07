@@ -5,7 +5,7 @@ class KeyWord:
     def __init__(self, keyword: str, rank: float, algorithm: str = None):
         self.keyword = keyword
         self.rank = rank
-        self.algorithmus = algorithm
+        self.algorithm = algorithm
 
     def __str__(self):
         return str(self.keyword)
@@ -25,12 +25,21 @@ class KeyWord:
 
 class TopicSet:
 
-    def __init__(self, class_name: str):
+    def __init__(self, class_name):
         self.class_name = class_name
         self.keyword_set = []
 
     def __repr__(self):
         return "class: {} \n keywords: {}".format(self.class_name, self.keyword_set)
+
+    def __add__(self, other):
+        class_names = []
+        class_names.append(self.class_name)
+        class_names.append(other.class_name)
+        topic_set = TopicSet(class_name=class_names)
+        [topic_set.add_keyword(x.keyword, x.rank, x.algorithm) for x in (self.keyword_set + other.keyword_set)]
+
+        return topic_set
 
     def add_keyword(self, keyword, rank: float, algorithm: str = None) -> None:
         if algorithm is not None:
@@ -52,7 +61,5 @@ class TopicSet:
         else:
             for keyword in set(self.keyword_set):
                 print(keyword.__str__())
-
-
 
     # print(topic_set.get_keywords(duplicates=True))
