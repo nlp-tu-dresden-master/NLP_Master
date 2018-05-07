@@ -12,7 +12,7 @@ class TopicEngine:
         self.corpora = corpora
         self.vocab = vocab
 
-    def generate_topics(self):
+    def generate_topics(self, textRank: bool = True, rake: bool = True, FreqDist: bool = True, tfidf: bool = True):
         """
         This function should create all Topics!
         For each topic there should be one TopicSet that will be created!
@@ -20,10 +20,10 @@ class TopicEngine:
         """
         encoded_corpora: Corpora = self.convert_corpora()
         # print(encoded_corpora.raw_corpora)
-        # freq_dist = FrequencyDistribution(corp=encoded_corpora)
-        # freq_keywords = freq_dist.extract_keywords()
-        # tfidf = TFIDF(corp=encoded_corpora)
-        # tfidf_keywords = tfidf.extract_keywords()
+        freq_dist = FrequencyDistribution(corp=encoded_corpora)
+        freq_keywords = freq_dist.extract_keywords()
+        tfidf = TFIDF(corp=encoded_corpora)
+        tfidf_keywords = tfidf.extract_keywords()
 
     def convert_corpora(self, with_stopwords: bool = False):
         encoded_dict: dict = dict()
