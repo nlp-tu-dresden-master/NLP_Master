@@ -100,5 +100,5 @@ dependencies:
   - webencodings==0.5.1
   - widgetsnbextension==3.2.1
   - wrapt==1.10.11
-prefix: /Users/danielhoschele/anaconda3/envs/NLP_Master
+prefix: /Users/richardhorn/anaconda3/envs/NLP_Master
 

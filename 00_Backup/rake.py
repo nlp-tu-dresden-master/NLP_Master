@@ -1,12 +1,6 @@
-# Implementation of RAKE - Rapid Automtic Keyword Exraction algorithm
-# as described in:
-# Rose, S., D. Engel, N. Cramer, and W. Cowley (2010).
-# Automatic keyword extraction from indi-vidual documents.
-# In M. W. Berry and J. Kogan (Eds.), Text Mining: Applications and Theory.unknown: John Wiley and Sons, Ltd.
-
 import re
 import operator
-from nlp_master import Corpora
+from nlp_master.Corpora import Corpora
 import os
 import nltk
 from nltk.tokenize import word_tokenize
@@ -142,19 +136,19 @@ class Rake(object):
 
 def pos_tagging_keyphrase(keyphrase: str):
     tagged = nltk.pos_tag(word_tokenize(keyphrase))
-    print(tagged)
+    # print(tagged)
     return "Next pos_tagged keyphrase"
 
 
 if test:
     # text = "Compatibility of systems of linear constraints over the set of natural numbers. Criteria of compatibility of a system of linear Diophantine equations, strict inequations, and nonstrict inequations are considered. Upper bounds for components of a minimal set of solutions and algorithms of construction of minimal generating sets of solutions for all types of systems are given. These criteria and the corresponding algorithms for constructing a minimal supporting set of solutions can be used in solving all the considered types of systems and systems of mixed types."
     text_list = [open("01_data/01_Clustering_definitions/" + i, "r").read()
-                 for i in os.listdir("01_data/01_Clustering_definitions")]
+                 for i in os.listdir("01_data/01_Clustering_definitions/")]
     text = " ".join(text_list)
     # Split text into sentences
     sentenceList = split_sentences(text)
-    #stoppath = "FoxStoplist.txt" #Fox stoplist contains "numbers", so it will not find "natural numbers" like in Table 1.1
-    stoppath = "SmartStoplist.txt"  #SMART stoplist misses some of the lower-scoring keywords in Figure 1.5, which means that the top 1/3 cuts off one of the 4.0 score words in Table 1.1
+    # stoppath = "FoxStoplist.txt" #Fox stoplist contains "numbers", so it will not find "natural numbers" like in Table 1.1
+    stoppath = "/Users/richardhorn/PycharmProjects/NLP_Master/00_Backup/SmartStoplist.txt"  # SMART stoplist misses some of the lower-scoring keywords in Figure 1.5, which means that the top 1/3 cuts off one of the 4.0 score words in Table 1.1
     stopwordpattern = build_stop_word_regex(stoppath)
 
     # generate candidate keywords
@@ -174,9 +168,10 @@ if test:
     if debug: print(totalKeywords)
     # print(sortedKeywords[0:int((totalKeywords / 3))])
 
-    rake = Rake("SmartStoplist.txt")
+    rake = Rake("/Users/richardhorn/PycharmProjects/NLP_Master/00_Backup/SmartStoplist.txt")
     keywords = rake.run(text)
-    print(keywords)
-
-    for w in keywords:
-        print(pos_tagging_keyphrase(w[0]))
+    # print(keywords)
+    for keyword in keywords:
+        print(keyword)
+    # for w in keywords:
+    #     print(pos_tagging_keyphrase(w[0]))
