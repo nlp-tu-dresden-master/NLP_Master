@@ -19,15 +19,19 @@ class TopicEngine:
         :return:
         """
         encoded_corpora: Corpora = self.convert_corpora()
-        freq_dist = FrequencyDistribution(corp=encoded_corpora)
-        freq_keywords = freq_dist.extract_keywords()
-        tfidf = TFIDF(corp=encoded_corpora)
-        tfidf_keywords = tfidf.extract_keywords()
+        # print(encoded_corpora.raw_corpora)
+        # freq_dist = FrequencyDistribution(corp=encoded_corpora)
+        # freq_keywords = freq_dist.extract_keywords()
+        # tfidf = TFIDF(corp=encoded_corpora)
+        # tfidf_keywords = tfidf.extract_keywords()
 
-    def convert_corpora(self):
+    def convert_corpora(self, with_stopwords: bool = False):
         encoded_dict: dict = dict()
         for algorithm_class in self.corpora.raw_corpora:
-            encoded_text = self.vocab.encode(self.corpora.raw_corpora[algorithm_class])
-            encoded_dict.update({algorithm_class: encoded_text})
+            if with_stopwords:
+                encoded_sentences = self.vocab.encode_for_rake(self.corpora.raw_corpora[algorithm_class])
+            else:
+                encoded_sentences = self.vocab.encode(self.corpora.raw_corpora[algorithm_class])
+            encoded_dict.update({algorithm_class: encoded_sentences})
         encoded_corpora = Corpora(encoded=encoded_dict)
         return encoded_corpora

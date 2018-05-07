@@ -43,10 +43,16 @@ class TFIDF(Operation):
 
         result_dict: dict = {}
         vocabulary: list = []
-        tokenized_corpora = self.corpora.raw_corpora
-        algorithms = list(tokenized_corpora)
+        algorithms = list(self.corpora.raw_corpora)
 
-        documents: list = [tokenized_corpora[i] for i in algorithms]
+        for algorithm_class in self.corpora.raw_corpora:
+            sents = self.corpora.raw_corpora[algorithm_class]
+            words: list = list()
+            for sent in sents:
+                words.extend(sent)
+            self.corpora.raw_corpora.update({algorithm_class: words})
+
+        documents: list = [self.corpora.raw_corpora[i] for i in algorithms]
 
         for i, tokens in enumerate(documents):
             doc_id = "{}".format(algorithms[i].lower())

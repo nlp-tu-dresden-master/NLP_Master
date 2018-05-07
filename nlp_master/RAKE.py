@@ -11,6 +11,12 @@ class RAKE(Operation):
         self.keywords = dict()
 
     def extract_keywords(self):
+        for algorithm_class in self.corpora.raw_corpora:
+            keyword_candidates = self.__determine_candidates(self.corpora.raw_corpora[algorithm_class])
+        pass
+
+    def __determine_candidates(self, sentences: list) -> list:
+
         pass
 
     def visualize(self, **kwargs):

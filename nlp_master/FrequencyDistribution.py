@@ -20,7 +20,11 @@ class FrequencyDistribution(Operation):
         all_words: dict = self.corpora.raw_corpora
 
         for alg_class in all_words:
-            words = all_words[alg_class]
+            sents: list = all_words[alg_class]
+            # print(sents)
+            words: list = list()
+            for sent in sents:
+                words.extend(sent)
             freq_distribution = nltk.FreqDist(words)
             # add that shit to dict and save in instance variable!
             result.update({alg_class: freq_distribution})
