@@ -1,14 +1,14 @@
 import nltk
 from nlp_master.Operation import Operation
-from nlp_master.TopicSet import TopicSet
 from nlp_master.Corpora import Corpora
+from nlp_master.TopicSet import TopicSet
 
 
 class FrequencyDistribution(Operation):
 
     def __init__(self, corp: Corpora):
         super().__init__(corpora=corp)
-        self.keywords = dict()
+        self.topics = dict()
 
     def extract_keywords(self) -> dict:
         """
@@ -21,19 +21,21 @@ class FrequencyDistribution(Operation):
 
         for alg_class in all_words:
             sents: list = all_words[alg_class]
-            # print(sents)
-            words: list = list()
-            for sent in sents:
-                words.extend(sent)
+
+            # All kinds of stopwords and punctuations are stored as 0
+            words: list = [item for sublist in sents for item in sublist if item != '0']
+            # print("words without 0:")
+            # print(words)
             freq_distribution = nltk.FreqDist(words)
-            # add that shit to dict and save in instance variable!
-            result.update({alg_class: freq_distribution})
-        self.keywords = result
+            most_common = freq_distribution.most_common(30)
+            sorted_distribution = sorted(freq_distribution.items(), key=lambda entry: entry[1], reverse=True)
+
+            topic_set = TopicSet(class_name=alg_class)
+            for number, count in sorted_distribution:
+                topic_set.add_keyword(keyword=number, rank=count, algorithm="FreqDist")
+            result.update({alg_class: topic_set})
+        self.topics = result
         return result
-        # topic_set = TopicSet()
-        # for alg in result:
-        #     # add this to the new topicSet
-        #     pass
 
     def visualize(self, **kwargs):
         pass

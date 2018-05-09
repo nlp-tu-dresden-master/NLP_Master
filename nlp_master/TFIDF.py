@@ -33,23 +33,17 @@ class TFIDF(Operation):
         # log(Total number of documents / number of docs with the term)
         return math.log(len(documents) / self.number_of_docs_containing_word(word, documents))
 
-    def extract_keywords(self) -> dict:  # Should return TopicSet!
+    def extract_keywords(self) -> dict:
         """
         This method uses the tf-idf algorithm to determine the most relevant words in Corpus
         """
-        """
-        Defining all helper functions for tf*idf algorithm
-        """
-
         result_dict: dict = {}
         vocabulary: list = []
         algorithms = list(self.corpora.raw_corpora)
 
         for algorithm_class in self.corpora.raw_corpora:
             sents = self.corpora.raw_corpora[algorithm_class]
-            words: list = list()
-            for sent in sents:
-                words.extend(sent)
+            words: list = [item for sublist in sents for item in sublist if item != '0']
             self.corpora.raw_corpora.update({algorithm_class: words})
 
         documents: list = [self.corpora.raw_corpora[i] for i in algorithms]
@@ -86,9 +80,7 @@ class TFIDF(Operation):
                     {"tf-idf": result_dict[doc][token]["term_frequency"] * result_dict[doc][token][
                         "inverse_document_frequency"]})
 
-        # Build new dict with only "token -> tf-idf"
-        # TODO Can be included in upper for loop for less code and little bit faster execution
-        words = {}
+        words: dict = dict()
         for doc in result_dict:
             words.update({doc: {}})
             for token in result_dict[doc]:
@@ -98,15 +90,14 @@ class TFIDF(Operation):
                     if result_dict[doc][token]['tf-idf'] > words[doc][token]:
                         words[doc].update({token: result_dict[doc][token]['tf-idf']})
 
-        for doc in words:
-            words[doc] = sorted(words[doc].items(), key=lambda entry: entry[1], reverse=True)
-            print("\n###### Results for algorithm: " + doc + " ######")
-            for i, token_and_score in enumerate(words[doc]):
-                print(token_and_score)
-                if i == 14:
-                    break
-        self.keywords = words
-        return words
+        topic_sets: dict = dict()
+        for alg in words:
+            words[alg] = sorted(words[alg].items(), key=lambda entry: entry[1], reverse=True)
+            topic_set = TopicSet(class_name=alg)
+            for word, score in words[alg]:
+                topic_set.add_keyword(keyword=word, rank=score, algorithm="TFIDF")
+            topic_sets.update({alg: topic_set})
+        return topic_sets
 
     def visualize(self, **kwargs) -> None:
         pass

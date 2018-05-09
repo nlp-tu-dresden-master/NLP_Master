@@ -8,7 +8,7 @@ class KeyWord:
         self.algorithm = algorithm
 
     def __str__(self):
-        return str(self.keyword) + "| " + str(self.rank) + "| " + str(self.algorithm)
+        return str(self.keyword) + " | " + str(self.rank) + " | " + str(self.algorithm)
 
     def __repr__(self):
         return "({}, {})".format(self.keyword, self.rank)
@@ -68,7 +68,7 @@ class TopicSet:
             return list(set(self.keyword_set))
 
     def pretty_print(self, duplicates=True):
-        print("_______TopicSet - {}________".format(self.class_name))
+        print("________TopicSet - {}________".format(self.class_name))
         if duplicates:
             for keyword in self.keyword_set:
                 print(keyword.__str__())

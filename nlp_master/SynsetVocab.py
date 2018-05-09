@@ -1,10 +1,13 @@
 import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.wsd import lesk
 from nltk.corpus import wordnet as wn
+import re
+import string
 """
 This class is used to hold a dictionary with the references from numbers to words and their meanings in our corpora
 """
@@ -38,26 +41,33 @@ class SynsetVocab:
             # sentences: list = sent_tokenize(raw_corp[alg])
             for clean_sent in cleaned_sentences:
                 all_cleaned_tokens.extend(clean_sent)
-                raw_sentence = " ".join([w for w, t in clean_sent])
+                raw_sentence = " ".join([w for w, t in clean_sent if w is not "stop"])
 
                 for (word, tag) in clean_sent:
-                    wsd = lesk(raw_sentence, word, self.get_wordnet_pos(tag))
+                    if word is not "stop":
+                        wsd = lesk(raw_sentence, word, self.get_wordnet_pos(tag))
+                    else:
+                        wsd = "stop"
                     # Took list to have full index range afterwards
                     all_wsds.append(wsd)
 
         none_counter = 0
         for i, synset in enumerate(all_wsds):
             if synset is not None:
-                # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines __eq__
-                # method and tries to call attribute __name from string. -> Not possible
-                if str(synset) not in [str(x) for x in synset_vocab.values()]:
-                    # Push in synset_vocab and word_vocab
-                    synset_vocab.update({i: synset})
-                    if synset not in word_vocab.keys():
-                        word_vocab.update({synset: [all_cleaned_tokens[i]]})
-                    else:
-                        current_list_of_words = word_vocab[synset]
-                        current_list_of_words.append(all_cleaned_tokens[i])
+                # Word vocab
+                if synset not in word_vocab.keys():
+                    word_vocab.update({synset: {all_cleaned_tokens[i]}})
+                else:
+                    current_set_of_words = word_vocab[synset]
+                    current_set_of_words.add(all_cleaned_tokens[i])
+
+                if synset is not "stop":
+                    # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines __eq__
+                    # method and tries to call attribute __name from string. -> Not possible
+                    if str(synset) not in [str(x) for x in synset_vocab.values()]:
+                        synset_vocab.update({i+1: synset})
+                else:
+                    synset_vocab.update({0: "stop"})
             else:
                 synset_vocab.update({i: "None_{}".format(all_cleaned_tokens[i][0])})
                 # Still value needs to be list for consistency
@@ -83,12 +93,25 @@ class SynsetVocab:
 
         sentences: list = sent_tokenize(text)
         for sent in sentences:
-            tokens: list = tokenizer.tokenize(sent)
+            tokens: list = word_tokenize(sent)
+            symbols = set(string.punctuation)
             tagged_tokens = nltk.pos_tag(tokens)
+            new_words: list = list()
+            for (word, tag) in tagged_tokens:
+                if word in stop_words or word in symbols:
+                    new_words.append(('stop', 'stop'))
+                else:
+                    try:
+                        c = (str(re.match(r'\w+', word)[0]), tag)
+                        new_words.append(c)
+                    except TypeError:
+                        new_words.append(("stop", "stop"))
+
             # Double cleaning necessary
             # Pos Tagging increases precision of lemmatizer significantly!
             cleaned_tokens = [(lemmatizer.lemmatize(w.lower(), self.get_wordnet_pos(i)), i)
-                              for w, i in tagged_tokens if w not in stop_words]
+                              if w not in stop_words and w is not "stop" else ("stop", "stop")
+                              for w, i in new_words]
             cleaned_tokens = [(word, pos) for word, pos in cleaned_tokens if word not in stop_words]
             result.append(cleaned_tokens)
         return result
@@ -98,9 +121,13 @@ class SynsetVocab:
         clean_text = self._preprocess_text(text)
         for sentence in clean_text:
             all_words_as_numbers: list = list()
-            sentence_together = " ".join([word for word, tag in sentence])
+            sentence_together = " ".join([word for word, tag in sentence if word != "stop"])
+            # print(sentence_together)
             for word, pos_tag in sentence:
-                wsd = lesk(sentence_together, word, self.get_wordnet_pos(pos_tag))
+                if word != "stop":
+                    wsd = lesk(sentence_together, word, self.get_wordnet_pos(pos_tag))
+                else:
+                    wsd = "stop"
                 if wsd is None:
                     wsd = "None_{}".format(word)
                 number = [key for key, value in self.synset_vocab.items() if str(value) == str(wsd)][0]
@@ -110,84 +137,98 @@ class SynsetVocab:
             encoded_sentences.append(all_words_as_numbers)
         return encoded_sentences
 
-    def decode(self, text: str) -> str:
-        numbers = text.split(" ")
-        synsets = [self.synset_vocab[int(number)] for number in numbers]
-        words = [self.word_vocab[synset] for synset in synsets]
-        return " ".join([word for [(word, pos)] in words])
+    def decode(self, text) -> list:
+        """
+        Decodes a given string or list of numbers corresponding the created SynsetVocab
+        :param text: Input numbers as string or list
+        :return: str
+        """
+        if isinstance(text, str):
+            text = text.split(" ")
 
+        synsets: list = list()
+        for numbers in text:
+            try:
+                syn = self.synset_vocab[int(numbers)]
+                synsets.append(syn)
+            except ValueError:
+                n_gram_nums = numbers.split(" ")
+                synsets.append([self.synset_vocab[int(num)] for num in n_gram_nums])
+
+        words: list = list()
+        for synset in synsets:
+            if not isinstance(synset, list):
+                word = list(self.word_vocab[synset])[0][0]
+                words.append(word)
+            else:
+                n_gram_word_tuple_sets = [self.word_vocab[s] for s in synset]
+                n_gram_words = set([w for n_set in n_gram_word_tuple_sets for (w, p) in n_set])
+                n_gram_words = " ".join([w for w in n_gram_words])
+                words.append(n_gram_words)
+        return words
+
+    """
     def encode_for_rake(self, text: str):
+        print("RAKE!!!")
         encoded_sentences: list = list()
         clean_text: list = list()
-        tokenizer = RegexpTokenizer(r'\w+')
+        # tokenizer = RegexpTokenizer(r'\w+')
         lemmatizer = WordNetLemmatizer()
         stop_words: list = list(stopwords.words("english"))
 
         sentences: list = sent_tokenize(text)
         for sent in sentences:
-            tokens: list = tokenizer.tokenize(sent)
+            tokens: list = word_tokenize(sent)
+            symbols = set(string.punctuation)
+            new_words: list = list()
             tagged_tokens = nltk.pos_tag(tokens)
+            # TODO maybe do this in preprocessing as well...
+            for (word, tag) in tagged_tokens:
+                if word in stop_words or word in symbols:
+                    new_words.append(('stop', 'stop'))
+                else:
+                    try:
+                        c = (str(re.match(r'\w+', word)[0]), tag)
+                        new_words.append(c)
+                    except TypeError:
+                        new_words.append(("stop", "stop"))
+
+            # print(new_words)
             # Double cleaning necessary
             # Pos Tagging increases precision of lemmatizer significantly!
             cleaned_tokens = [(lemmatizer.lemmatize(w.lower(), self.get_wordnet_pos(i)), i)
-                              if w not in stop_words else ("stop", "stop")
-                              for index, (w, i) in enumerate(tagged_tokens)]
-            cleaned_tokens = [(word, pos) if word not in stop_words else ("stop", "stop")
+                              if w not in stop_words and w is not "stop" else ("stop", "stop")
+                              for index, (w, i) in enumerate(new_words)]
+            cleaned_tokens = [(word, pos) if word not in stop_words
+                              else ("stop", "stop")
                               for word, pos in cleaned_tokens]
 
             clean_text.append(cleaned_tokens)
-
+        # print("Clean:")
+        # print(clean_text)
         for sentence in clean_text:
             all_words_as_numbers: list = list()
             sentence_together = " ".join([word for word, tag in sentence if word is not "stop"])
+            print(sentence_together)
             for word, pos_tag in sentence:
                 if word != "stop":
                     wsd = lesk(sentence_together, word, self.get_wordnet_pos(pos_tag))
+                    number = 0
                     if wsd is None:
                         wsd = "None_{}".format(word)
-                    number = [key for key, value in self.synset_vocab.items() if str(value) == str(wsd)][0]
+                    try:
+                        number = [key for key, value in self.synset_vocab.items() if str(value) == str(wsd)][0]
+                    except:
+                        print("CAUTION!!!!: {}".format(wsd))
                     # print("original: {}".format(wsd))
                     # print("found: {}".format(number))
                     all_words_as_numbers.append(str(number))
                 else:
                     all_words_as_numbers.append("stop")
             encoded_sentences.append(all_words_as_numbers)
+        print(encoded_sentences)
         return encoded_sentences
-        """
-        print(text)
-        all_cropped_sentences: list = list()
-        tokenizer = RegexpTokenizer(r'\w+')
-        lemmatizer = WordNetLemmatizer()
-        stop_words: list = list(stopwords.words("english"))
-        lookup: list = list()
-
-        for sentence in sent_tokenize(text):
-            # print(sentence)
-            words = tokenizer.tokenize(sentence)
-            lookup.append(words)
-            tagged = nltk.pos_tag(words)
-            # print(tagged)
-            cleaned_sentence = " ".join([w for w in words if w not in stop_words])
-            cropped = [((lemmatizer.lemmatize(word.lower(), self.get_wordnet_pos(tag)), tag)
-                        if word not in stop_words else ("stop", "stop"))
-                       for (word, tag) in tagged]
-            cropped_clean = [(lesk(cleaned_sentence, x, self.get_wordnet_pos(tag))) if x != "stop" else "stop"
-                             for (x, tag) in cropped
-                             if x not in stop_words]
-            # print(cropped_clean)
-            all_cropped_sentences.append(cropped_clean)
-        for i, cropped_sent in enumerate(all_cropped_sentences):
-            for j, sense in enumerate(cropped_sent):
-                if str(sense) != "stop":
-                    if sense is None:
-                        sense = "None_{}".format(lookup[i][j])
-                    print(sense)
-                    sense = [key for key, value in self.synset_vocab.items() if str(value) == str(sense)]
-                    print(sense)
-            print(cropped_sent)
-        return all_cropped_sentences
-        """
-
+    """
     @staticmethod
     def get_wordnet_pos(pos_tag: str):
         if pos_tag.startswith('J'):

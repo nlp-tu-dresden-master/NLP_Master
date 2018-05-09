@@ -1,4 +1,5 @@
 from nlp_master import *
+from nlp_master.Operation import Operation
 from pytextrank import *
 import networkx as nx
 import matplotlib.pyplot as plt
