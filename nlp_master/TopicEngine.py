@@ -49,12 +49,16 @@ class TopicEngine:
             with open("freq_execution_time.txt", "w+") as file:
                 file.write("Time for execution of FrequencyDistribution algorithm: {} seconds".format(freq_time_total))
         if do_rake:
-            for rake_topic in rake_topics:
-                rake_topics[rake_topic].pretty_print()
+            pass
+            # for rake_topic in rake_topics:
+            #     rake_topics[rake_topic].pretty_print()
 
-        if do_tfidf:
-            for tfidf_top in tfidf_topics:
-                tfidf_topics[tfidf_top].pretty_print()
+        # if do_tfidf:
+        #     for tfidf_top in tfidf_topics:
+        #         tfidf_topics[tfidf_top].pretty_print()
+
+        if do_FreqDist:
+            freq_dist.visualize(20)
         # TODO Combine Topics!
         return 2
 

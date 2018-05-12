@@ -1,5 +1,4 @@
 import nltk
-from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -62,8 +61,8 @@ class SynsetVocab:
                     current_set_of_words.add(all_cleaned_tokens[i])
 
                 if synset is not "stop":
-                    # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines __eq__
-                    # method and tries to call attribute __name from string. -> Not possible
+                    # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines
+                    # __eq__ method and tries to call attribute __name from string. -> Not possible
                     if str(synset) not in [str(x) for x in synset_vocab.values()]:
                         synset_vocab.update({i+1: synset})
                 else:
@@ -87,7 +86,7 @@ class SynsetVocab:
         :return: list (sentences) of list (words) with format list(list((word, pos_tag)))
         """
         result: list = list()
-        tokenizer = RegexpTokenizer(r'\w+')
+        # tokenizer = RegexpTokenizer(r'\w+')
         lemmatizer = WordNetLemmatizer()
         stop_words: list = list(stopwords.words("english"))
 
