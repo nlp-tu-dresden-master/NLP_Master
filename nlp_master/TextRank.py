@@ -37,7 +37,7 @@ class TextRank(Operation):
                     f.write("%s\n" % pretty_print(graf._asdict()))
 
             self.graph, self.ranks = pytextrank.text_rank(self.path_stage1)
-            self.__delete_stages([self.path_stage0, self.path_stage1])
+            #self.__delete_stages([self.path_stage0, self.path_stage1])
 
     def thin_out_graph(self, threshold: float) -> nx.DiGraph:
         graph = self.graph.copy()
@@ -77,7 +77,7 @@ class TextRank(Operation):
                 # to view output in this notebook
                 if rl is not None:
                     self.topic_set.add_keyword(keyword=rl.text, rank=rl.rank, algorithm="TextRank")
-        self.__delete_stages([self.path_stage2, "graph.dot"])
+        #self.__delete_stages([self.path_stage2, "graph.dot"])
         return self.topic_set
 
     def visualize(self, **kwargs):
