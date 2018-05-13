@@ -32,6 +32,8 @@ class TopicSet:
     def __repr__(self):
         return "class: {} \n keywords: {}".format(self.class_name, self.keyword_set)
 
+    # TODO Change that class name is only added when it is different to the existing one
+    # TODO Implement that only new keywords are added and existing ones are boosted in rank.
     def __add__(self, other):
         class_names = []
         class_names.append(self.class_name)
@@ -47,11 +49,15 @@ class TopicSet:
     def __iter__(self):
         return iter(self.keyword_set)
 
+    def sort_by_rank(self):
+        self.keyword_set.sort(key=lambda x: x.rank, reverse=True)
+
     def norm_ranks(self):
         maximum = max([x.rank for x in self.keyword_set])
+        minimum = min([x.rank for x in self.keyword_set])
         normed_keyword_set = []
         for keyword in self.keyword_set:
-            keyword.rank = keyword.rank / maximum * maximum
+            keyword.rank = (keyword.rank-minimum) / (maximum-minimum)
             normed_keyword_set.append(keyword)
         self.keyword_set = normed_keyword_set
 

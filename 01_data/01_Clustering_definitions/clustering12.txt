@@ -1,0 +1,1 @@
+Clustering is concerned with grouping together objects that are similar to each other and dissimilar to the objects belonging to other clusters. In many fields there are obvious benefits to be had from grouping together similar objects

@@ -37,6 +37,7 @@ class SynsetVocab:
 
         for alg in raw_corp:
             cleaned_sentences = self._preprocess_text(raw_corp[alg])
+            file = open("encoding_evaluation.txt", "w+")
             # sentences: list = sent_tokenize(raw_corp[alg])
             for clean_sent in cleaned_sentences:
                 all_cleaned_tokens.extend(clean_sent)
@@ -47,9 +48,11 @@ class SynsetVocab:
                         wsd = lesk(raw_sentence, word, self.get_wordnet_pos(tag))
                     else:
                         wsd = "stop"
+                    file.write(raw_sentence + " | "+word + " | "+str(wsd)+"\n")
                     # Took list to have full index range afterwards
                     all_wsds.append(wsd)
-
+        # print("all_wsds")
+        # print(all_wsds)
         none_counter = 0
         for i, synset in enumerate(all_wsds):
             if synset is not None:
@@ -63,12 +66,15 @@ class SynsetVocab:
                 if synset is not "stop":
                     # if "None" not in synset_vocab.values():  # Not working because class WordnetObject redefines
                     # __eq__ method and tries to call attribute __name from string. -> Not possible
-                    if str(synset) not in [str(x) for x in synset_vocab.values()]:
+                    test_against = [str(x) for x in synset_vocab.values()]
+                    # if str(synset) == "Synset('agree.v.02')":
+                    #     a = "stop_here"
+                    if str(synset) not in test_against:
                         synset_vocab.update({i+1: synset})
                 else:
                     synset_vocab.update({0: "stop"})
             else:
-                synset_vocab.update({i: "None_{}".format(all_cleaned_tokens[i][0])})
+                synset_vocab.update({i+1: "None_{}".format(all_cleaned_tokens[i][0])})
                 # Still value needs to be list for consistency
                 word_vocab.update({"None_{}".format(all_cleaned_tokens[i][0]): [all_cleaned_tokens[i]]})
                 none_counter += 1
@@ -121,15 +127,18 @@ class SynsetVocab:
         for sentence in clean_text:
             all_words_as_numbers: list = list()
             sentence_together = " ".join([word for word, tag in sentence if word != "stop"])
-            # print(sentence_together)
             for word, pos_tag in sentence:
                 if word != "stop":
                     wsd = lesk(sentence_together, word, self.get_wordnet_pos(pos_tag))
+                    # if str(wsd) == "Synset('agree.v.02')":
+                    #     a = "stop_here"
                 else:
                     wsd = "stop"
                 if wsd is None:
                     wsd = "None_{}".format(word)
+                # print(wsd)
                 number = [key for key, value in self.synset_vocab.items() if str(value) == str(wsd)][0]
+                # print(sentence_together)
                 # print("original: {}".format(wsd))
                 # print("found: {}".format(number))
                 all_words_as_numbers.append(str(number))
@@ -140,7 +149,7 @@ class SynsetVocab:
         """
         Decodes a given string or list of numbers corresponding the created SynsetVocab
         :param text: Input numbers as string or list
-        :return: str
+        :return: list
         """
         if isinstance(text, str):
             text = text.split(" ")
@@ -162,72 +171,12 @@ class SynsetVocab:
             else:
                 n_gram_word_tuple_sets = [self.word_vocab[s] for s in synset]
                 n_gram_words = set([w for n_set in n_gram_word_tuple_sets for (w, p) in n_set])
+                print("Words:")
+                print(n_gram_words)
                 n_gram_words = " ".join([w for w in n_gram_words])
                 words.append(n_gram_words)
         return words
 
-    """
-    def encode_for_rake(self, text: str):
-        print("RAKE!!!")
-        encoded_sentences: list = list()
-        clean_text: list = list()
-        # tokenizer = RegexpTokenizer(r'\w+')
-        lemmatizer = WordNetLemmatizer()
-        stop_words: list = list(stopwords.words("english"))
-
-        sentences: list = sent_tokenize(text)
-        for sent in sentences:
-            tokens: list = word_tokenize(sent)
-            symbols = set(string.punctuation)
-            new_words: list = list()
-            tagged_tokens = nltk.pos_tag(tokens)
-            # TODO maybe do this in preprocessing as well...
-            for (word, tag) in tagged_tokens:
-                if word in stop_words or word in symbols:
-                    new_words.append(('stop', 'stop'))
-                else:
-                    try:
-                        c = (str(re.match(r'\w+', word)[0]), tag)
-                        new_words.append(c)
-                    except TypeError:
-                        new_words.append(("stop", "stop"))
-
-            # print(new_words)
-            # Double cleaning necessary
-            # Pos Tagging increases precision of lemmatizer significantly!
-            cleaned_tokens = [(lemmatizer.lemmatize(w.lower(), self.get_wordnet_pos(i)), i)
-                              if w not in stop_words and w is not "stop" else ("stop", "stop")
-                              for index, (w, i) in enumerate(new_words)]
-            cleaned_tokens = [(word, pos) if word not in stop_words
-                              else ("stop", "stop")
-                              for word, pos in cleaned_tokens]
-
-            clean_text.append(cleaned_tokens)
-        # print("Clean:")
-        # print(clean_text)
-        for sentence in clean_text:
-            all_words_as_numbers: list = list()
-            sentence_together = " ".join([word for word, tag in sentence if word is not "stop"])
-            print(sentence_together)
-            for word, pos_tag in sentence:
-                if word != "stop":
-                    wsd = lesk(sentence_together, word, self.get_wordnet_pos(pos_tag))
-                    number = 0
-                    if wsd is None:
-                        wsd = "None_{}".format(word)
-                    try:
-                        number = [key for key, value in self.synset_vocab.items() if str(value) == str(wsd)][0]
-                    except:
-                        print("CAUTION!!!!: {}".format(wsd))
-                    # print("original: {}".format(wsd))
-                    # print("found: {}".format(number))
-                    all_words_as_numbers.append(str(number))
-                else:
-                    all_words_as_numbers.append("stop")
-            encoded_sentences.append(all_words_as_numbers)
-        print(encoded_sentences)
-        return encoded_sentences
-    """
     @staticmethod
     def get_wordnet_pos(pos_tag: str):
         if pos_tag.startswith('J'):

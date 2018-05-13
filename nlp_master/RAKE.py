@@ -23,6 +23,7 @@ class RAKE(Operation):
             topic_set = TopicSet(class_name=algorithm_class)
             for candidate in sorted_candidates:
                 topic_set.add_keyword(keyword=candidate[0], rank=candidate[1], algorithm="RAKE")
+            topic_set.norm_ranks()
             topic_sets.update({algorithm_class: topic_set})
         return topic_sets
 

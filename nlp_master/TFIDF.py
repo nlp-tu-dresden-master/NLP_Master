@@ -39,14 +39,16 @@ class TFIDF(Operation):
         """
         result_dict: dict = {}
         vocabulary: list = []
-        algorithms = list(self.corpora.raw_corpora)
+        algorithms = list(self.corpora.raw_corpora)  # == keys of dict --> Algorithms
+        documents = list()
 
         for algorithm_class in self.corpora.raw_corpora:
             sents = self.corpora.raw_corpora[algorithm_class]
             words: list = [item for sublist in sents for item in sublist if item != '0']
-            self.corpora.raw_corpora.update({algorithm_class: words})
-
-        documents: list = [self.corpora.raw_corpora[i] for i in algorithms]
+            # TODO THIS SHOULD NOT BE DONE OVERWRITING OPERATION CORPORA
+            documents.append(words)
+        #     self.corpora.raw_corpora.update({algorithm_class: words})
+        # documents: list = [self.corpora.raw_corpora[i] for i in algorithms]
 
         for i, tokens in enumerate(documents):
             doc_id = "{}".format(algorithms[i].lower())
@@ -61,7 +63,7 @@ class TFIDF(Operation):
             all_tokens.extend(tokens)
             all_tokens.extend(bigram_tokens)
             all_tokens.extend(trigram_tokens)
-
+            # print(all_tokens)
             vocabulary.append(all_tokens)
             result_dict.update({doc_id: {}})
 
@@ -96,6 +98,7 @@ class TFIDF(Operation):
             topic_set = TopicSet(class_name=alg)
             for word, score in words[alg]:
                 topic_set.add_keyword(keyword=word, rank=score, algorithm="TFIDF")
+            topic_set.norm_ranks()
             topic_sets.update({alg: topic_set})
         return topic_sets
 

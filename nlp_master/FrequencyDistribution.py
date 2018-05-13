@@ -21,17 +21,16 @@ class FrequencyDistribution(Operation):
 
         for alg_class in all_words:
             sents: list = all_words[alg_class]
-
             # All kinds of stopwords and punctuations are stored as 0
-            words: list = [item for sublist in sents for item in sublist if item != '0']
+            words: list = [item for sublist in sents for item in sublist if item != "0"]
             # print("words without 0:")
             # print(words)
             freq_distribution = nltk.FreqDist(words)
             sorted_distribution = sorted(freq_distribution.items(), key=lambda entry: entry[1], reverse=True)
-
             topic_set = TopicSet(class_name=alg_class)
             for number, count in sorted_distribution:
                 topic_set.add_keyword(keyword=number, rank=count, algorithm="FreqDist")
+            topic_set.norm_ranks()
             result.update({alg_class: topic_set})
 
             self.freq_dists.update({alg_class: freq_distribution})
