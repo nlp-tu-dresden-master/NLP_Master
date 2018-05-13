@@ -45,10 +45,7 @@ class TFIDF(Operation):
         for algorithm_class in self.corpora.raw_corpora:
             sents = self.corpora.raw_corpora[algorithm_class]
             words: list = [item for sublist in sents for item in sublist if item != '0']
-            # TODO THIS SHOULD NOT BE DONE OVERWRITING OPERATION CORPORA
             documents.append(words)
-        #     self.corpora.raw_corpora.update({algorithm_class: words})
-        # documents: list = [self.corpora.raw_corpora[i] for i in algorithms]
 
         for i, tokens in enumerate(documents):
             doc_id = "{}".format(algorithms[i].lower())

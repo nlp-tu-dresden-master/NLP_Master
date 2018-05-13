@@ -145,7 +145,29 @@ class SynsetVocab:
             encoded_sentences.append(all_words_as_numbers)
         return encoded_sentences
 
-    def decode(self, text) -> list:
+    def decode_to_sense(self, text) -> list:
+        """
+        Decodes a given string or list of numbers corresponding the created SynsetVocab
+        :param text: Input numbers as string or list
+        :return: list
+        """
+        if isinstance(text, str):
+            text = text.split(" ")
+
+        synsets: list = list()
+        for numbers in text:
+            try:
+                syn = self.synset_vocab[int(numbers)]
+                synsets.append([syn])
+            except ValueError:
+                n_gram_nums = numbers.split(" ")
+                synsets.append([self.synset_vocab[int(num)] for num in n_gram_nums])
+
+        sense_list = [item for sublist in synsets for item in sublist]
+        # print(sense_list)
+        return sense_list
+
+    def decode_to_text(self, text) -> list:
         """
         Decodes a given string or list of numbers corresponding the created SynsetVocab
         :param text: Input numbers as string or list

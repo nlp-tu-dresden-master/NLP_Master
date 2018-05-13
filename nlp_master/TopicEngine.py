@@ -73,9 +73,11 @@ class TopicEngine:
             for i, keyword in enumerate(keywords):
                 number = keyword.keyword
                 if number != "":
-                    resulting_words = self.vocab.decode(str(number))
-                    word = " ".join(resulting_words) if len(resulting_words) > 1 else resulting_words[0]
-                    decoded_topic.add_keyword(word, keyword.rank, keyword.algorithm)
+                    resulting_words = self.vocab.decode_to_sense(str(number))
+                    # Required if here should be decoded to text not to sense -> Sense required to get
+                    # synonyms, hypernyms, lemmas, etc.
+                    # word = " ".join(resulting_words) if len(resulting_words) > 1 else resulting_words[0]
+                    decoded_topic.add_keyword(resulting_words, keyword.rank, keyword.algorithm)
             decoded_result_dict.update({key: decoded_topic})
         for t in decoded_result_dict:
             decoded_result_dict[t].sort_by_rank()
