@@ -84,3 +84,7 @@ class Corpora:
                     documents.append(text)
             document_corpora.update({self.__algorithm_names[i].lower(): documents})
         return document_corpora
+
+    @property
+    def algorithm_names(self):
+        return [x.lower() for x in self.__algorithm_names]

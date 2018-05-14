@@ -6,3 +6,5 @@ from nlp_master.SynsetVocab import SynsetVocab
 from nlp_master.TFIDF import TFIDF
 from nlp_master.FrequencyDistribution import FrequencyDistribution
 from nlp_master.TopicSet import *
+from nlp_master.Functions import *
+from nlp_master.TextRank import TextRank

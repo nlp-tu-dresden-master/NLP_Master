@@ -25,7 +25,7 @@ class TextRank(Operation):
 
     def __initialize_graph(self):
         corpus = self.corpora
-        classes = corpus.get_all_algorithms()
+        classes = corpus.algorithm_names
         self.topic_set = TopicSet(class_name=classes)
         for _class in classes:
             raw_corpus = {"id": 777, "text": corpus.raw_corpora[_class]}
