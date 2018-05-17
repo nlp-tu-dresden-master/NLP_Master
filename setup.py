@@ -1,16 +1,11 @@
 from setuptools import setup
-
-def readme():
-    with open('README.rst') as f:
-        return f.read()
-
 # Maybe it's possible to enter path to en_core_web stuff to install all shit.
-setup(name='pytextrank',
-      version='1.1.0',
-      description='Python implimentation of TextRank for text document NLP parsing and summarization',
-      long_description=readme(),
+setup(name='nlp_master',
+      version='0.1',
+      description='A implementation of different classes etc. for our master thesis.',
+      long_description= "A implementation of different classes etc. for our master thesis.",
       classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: Alpha',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Information Technology',
@@ -25,12 +20,12 @@ setup(name='pytextrank',
         'Topic :: Text Processing :: Indexing',
         'Topic :: Text Processing :: Linguistic',
       ],
-      keywords='textrank, parsing, automatic summarization, natural language processing, nlp, text analytics',
-      url='http://github.com/ceteri/pytextrank',
-      author='Paco Nathan',
-      author_email='ceteri@gmail.com',
+      keywords='test',
+      url='',
+      author='Hoeschele & Horn',
+      author_email='',
       license='Apache License 2.0',
-      packages=['pytextrank'],
+      packages=['nlp_master'],
       install_requires=[
       ],
       zip_safe=False)
