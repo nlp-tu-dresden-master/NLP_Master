@@ -82,7 +82,7 @@ class Topic_Engine:
             return float(frequency(word, document) / number_of_words(document))
 
         def number_of_docs_containing_word(word: str, documents: list) -> float:
-            count: int = 0
+            count: = 0
             for document in documents:
                 if frequency(word, document) > 0:
                     count += 1
